@@ -1,0 +1,25 @@
+# Environment files
+.env
+
+# Virtual environment
+myvenv/
+venv/
+env/
+ENV/
+
+# Python caching
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Temporary outputs and scratch files
+outputs/
+scratch/
+*.log
+*.pdf
+zoom_transcript (1).vtt
+
+# IDE configurations
+.vscode/
+.idea/

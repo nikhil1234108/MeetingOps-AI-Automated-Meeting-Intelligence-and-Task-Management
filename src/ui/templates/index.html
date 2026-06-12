@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Origin Medical - Meeting Automation Hub</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0e1a;
+            --bg-secondary: rgba(20, 26, 46, 0.6);
+            --bg-card: rgba(30, 41, 74, 0.4);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --primary-accent: #3b82f6; /* Blue */
+            --primary-glow: rgba(59, 130, 246, 0.15);
+            --accent-success: #10b981; /* Green */
+            --accent-warning: #f59e0b; /* Amber */
+            --accent-danger: #ef4444; /* Red */
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+            --font-display: 'Outfit', sans-serif;
+            --glass-blur: blur(16px);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(29, 78, 216, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(76, 29, 149, 0.15) 0px, transparent 50%);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: rgba(10, 14, 26, 0.7);
+            backdrop-filter: var(--glass-blur);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.25rem 2.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary-accent), #8b5cf6);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            font-family: var(--font-display);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .logo-text {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.25rem;
+            letter-spacing: 0.5px;
+            background: linear-gradient(to right, #ffffff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .system-status {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .mode-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            padding: 0.35rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--accent-success);
+            box-shadow: 0 0 8px var(--accent-success);
+        }
+
+        .status-dot.mock {
+            background-color: var(--accent-warning);
+            box-shadow: 0 0 8px var(--accent-warning);
+        }
+
+        main {
+            flex: 1;
+            max-width: 1200px;
+            width: 100%;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* Progress Steps Tracker */
+        .steps-container {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-bottom: 1rem;
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            backdrop-filter: var(--glass-blur);
+        }
+
+        .step-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            flex: 1;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-circle {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-family: var(--font-display);
+            color: var(--text-secondary);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .step-item.active .step-circle {
+            background: var(--primary-accent);
+            border-color: var(--primary-accent);
+            color: white;
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        .step-item.completed .step-circle {
+            background: var(--accent-success);
+            border-color: var(--accent-success);
+            color: white;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+        }
+
+        .step-label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .step-item.active .step-label {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .step-line-bg {
+            position: absolute;
+            top: 42px;
+            left: 10%;
+            width: 80%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.05);
+            z-index: 1;
+        }
+
+        .step-line-progress {
+            position: absolute;
+            top: 42px;
+            left: 10%;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary-accent), var(--accent-success));
+            z-index: 1.5;
+            transition: width 0.5s ease-in-out;
+        }
+
+        /* Dashboard Cards & Layout */
+        .dashboard-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: var(--glass-blur);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .card-header {
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .card-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        /* Forms, inputs, buttons */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        input[type="text"], textarea, select {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        input[type="text"]:focus, textarea:focus, select:focus {
+            border-color: var(--primary-accent);
+            box-shadow: 0 0 8px rgba(59, 130, 246, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.75rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            outline: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-accent);
+            color: white;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-success {
+            background: var(--accent-success);
+            color: white;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-success:hover {
+            background: #059669;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-primary);
+        }
+
+        /* File Upload styling */
+        .upload-area {
+            border: 2px dashed rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 3rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.01);
+            transition: all 0.2s ease;
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary-accent);
+            background: rgba(59, 130, 246, 0.02);
+        }
+
+        .upload-icon {
+            font-size: 2.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .metadata-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .metadata-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .metadata-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .metadata-value {
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        /* Action items table */
+        .action-items-table-container {
+            overflow-x: auto;
+            margin-top: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        th {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: middle;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.6rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-bug {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--accent-danger);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .badge-story {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary-accent);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .badge-task {
+            background: rgba(139, 92, 246, 0.1);
+            color: #a78bfa;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
+        .badge-low-conf {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--accent-warning);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            animation: pulse 2s infinite;
+        }
+
+        .cache-alert-box {
+            background: rgba(16, 185, 129, 0.08);
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: #d1fae5;
+            font-size: 0.9rem;
+            font-weight: 500;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.1);
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+
+        /* Jira mapping cards */
+        .jira-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .jira-card.unassigned {
+            border-color: rgba(239, 68, 68, 0.3);
+            background: rgba(239, 68, 68, 0.02);
+        }
+
+        .jira-card-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .jira-card-task {
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .jira-card-meta {
+            display: flex;
+            gap: 0.75rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Slack Block Preview style */
+        .slack-mock {
+            background: #121013; /* Slack Dark Theme BG */
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            font-family: Arial, sans-serif;
+            color: #dfdde0;
+            line-height: 1.4;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .slack-header {
+            font-weight: 900;
+            font-size: 1.2rem;
+            color: #ffffff;
+            margin-bottom: 0.75rem;
+        }
+
+        .slack-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.15);
+            margin: 1rem 0;
+        }
+
+        .slack-link {
+            color: #1264a3;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .slack-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Loading Spinner Overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 14, 26, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(59, 130, 246, 0.1);
+            border-left-color: var(--primary-accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            animation: text-pulse 1.5s infinite ease-in-out;
+        }
+
+        @keyframes text-pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon">O</div>
+            <div>
+                <div class="logo-text">Origin Medical</div>
+                <div style="font-size: 0.7rem; color: var(--text-secondary); font-weight: 500;">AUTOMATION sync</div>
+            </div>
+        </div>
+        <div class="system-status">
+            <div class="mode-toggle" id="mockModeToggleContainer">
+                <span id="statusDot" class="status-dot mock"></span>
+                <span id="modeText" style="font-weight: 600;">Mock Mode Enabled</span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Steps Progress Bar -->
+        <div class="steps-container">
+            <div class="step-line-bg"></div>
+            <div class="step-line-progress" id="stepLine"></div>
+            
+            <div class="step-item active" id="step1">
+                <div class="step-circle">1</div>
+                <div class="step-label">Ingestion</div>
+            </div>
+            <div class="step-item" id="step2">
+                <div class="step-circle">2</div>
+                <div class="step-label">Extraction</div>
+            </div>
+            <div class="step-item" id="step3">
+                <div class="step-circle">3</div>
+                <div class="step-label">Jira Sync</div>
+            </div>
+            <div class="step-item" id="step4">
+                <div class="step-circle">4</div>
+                <div class="step-label">Slack Post</div>
+            </div>
+        </div>
+
+        <!-- GATE 1: INGESTION SCREEN -->
+        <div class="dashboard-card" id="gate1Screen">
+            <div class="card-header">
+                <div>
+                    <h2 class="card-title">Gate 1: Ingestion & Normalization</h2>
+                    <p class="card-subtitle">Upload or parse the meeting transcript and review standard text</p>
+                </div>
+                <button class="btn btn-secondary btn-sm" onclick="loadDefaultTranscript()">Load Skin Cancer Transcript</button>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Upload Transcript (.vtt, .srt, .txt, .pdf, .docx, .json)</label>
+                <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+                    <div class="upload-icon">📥</div>
+                    <p style="font-weight: 500; margin-bottom: 0.25rem;">Drag & drop file or click to browse</p>
+                    <p style="font-size: 0.8rem; color: var(--text-secondary);">Supports VTT, SRT, PDF, Word, JSON, TXT</p>
+                    <input type="file" id="fileInput" style="display: none;" onchange="handleFileUpload(event)">
+                </div>
+            </div>
+
+            <div id="ingestedReportSection" style="display: none; margin-bottom: 1.5rem;">
+                <h3 style="font-size: 1rem; margin-bottom: 0.5rem; color: var(--text-secondary);">Input Analysis Report</h3>
+                <div class="metadata-grid">
+                    <div class="metadata-item">
+                        <span class="metadata-label">File Name</span>
+                        <span class="metadata-value" id="metaFileName">-</span>
+                    </div>
+                    <div class="metadata-item">
+                        <span class="metadata-label">File Type</span>
+                        <span class="metadata-value" id="metaFileType">-</span>
+                    </div>
+                    <div class="metadata-item">
+                        <span class="metadata-label">Participants</span>
+                        <span class="metadata-value" id="metaParticipants">-</span>
+                    </div>
+                    <div class="metadata-item">
+                        <span class="metadata-label">Est. Duration</span>
+                        <span class="metadata-value" id="metaDuration">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Normalized Transcript Text (Editable)</label>
+                <textarea id="transcriptText" placeholder="Normalized transcript will appear here. You can manually tweak it before processing..."></textarea>
+            </div>
+
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="proceedToGate2()" id="btnIngestProceed">Approve & Run AI Extraction →</button>
+            </div>
+        </div>
+
+        <!-- GATE 2: AI EXTRACTION REVIEW SCREEN -->
+        <div class="dashboard-card" id="gate2Screen" style="display: none;">
+            <div class="card-header">
+                <div>
+                    <h2 class="card-title">Gate 2: AI Summarization & Action Items</h2>
+                    <p class="card-subtitle">Review, modify, or add extracted tasks and decisions</p>
+                </div>
+            </div>
+
+            <!-- Glowing Cache-Hit Warning Box -->
+            <div class="cache-alert-box" id="cacheAlertBox" style="display: none;">
+                <span>⚡</span>
+                <div>
+                    <strong>Cache Hit Detected:</strong> An identical meeting transcript was processed previously. Retrieved cached AI results instantly from the database (Gemini call skipped).
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Meeting Title</label>
+                <input type="text" id="meetingTitle">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Meeting Date (YYYY-MM-DD)</label>
+                <input type="text" id="meetingDate" style="max-width: 200px;">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Meeting Summary (Editable)</label>
+                <textarea id="meetingSummary" style="min-height: 100px;"></textarea>
+            </div>
+
+            <div class="form-group">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                    <label class="form-label" style="margin-bottom: 0;">Key Decisions Log</label>
+                    <button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;" onclick="addDecisionRow()">+ Add Decision</button>
+                </div>
+                <div id="decisionsContainer" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <!-- Rows dynamic -->
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                    <label class="form-label" style="margin-bottom: 0;">Identified Action Items</label>
+                    <button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;" onclick="addActionRow()">+ Add Task</button>
+                </div>
+                
+                <div class="action-items-table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 50%;">Task Description</th>
+                                <th style="width: 15%;">Speaker Assignee</th>
+                                <th style="width: 15%;">Issue Type</th>
+                                <th style="width: 12%;">Priority</th>
+                                <th style="width: 8%;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="actionItemsTableBody">
+                            <!-- Rows dynamic -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <button class="btn btn-secondary" onclick="backToGate(1)">← Back to Ingestion</button>
+                <button class="btn btn-primary" onclick="proceedToGate3()">Approve & Go to Jira Setup →</button>
+            </div>
+        </div>
+
+        <!-- GATE 3: JIRA PRE-PUBLISH REVIEW SCREEN -->
+        <div class="dashboard-card" id="gate3Screen" style="display: none;">
+            <div class="card-header">
+                <div>
+                    <h2 class="card-title">Gate 3: Jira Account Assignment</h2>
+                    <p class="card-subtitle">Map transcript speakers to active Jira Cloud users. Unmapped accounts are flagged in red.</p>
+                </div>
+            </div>
+
+            <div id="jiraProjectInfo" style="margin-bottom: 1.5rem; padding: 1rem; border-radius: 8px; background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.15);">
+                <strong>Target Jira Project Key:</strong> <span id="jiraProjectKeyBadge" style="color: var(--primary-accent); font-family: monospace; font-size: 1.1rem; font-weight: 700;">OA</span>
+            </div>
+
+            <div id="jiraCardsContainer">
+                <!-- Dynamic cards with user selectors -->
+            </div>
+
+            <div class="btn-group">
+                <button class="btn btn-secondary" onclick="backToGate(2)">← Back to AI Outputs</button>
+                <button class="btn btn-success" onclick="publishToJira()">Sync & Create Jira Tickets ✓</button>
+            </div>
+        </div>
+
+        <!-- GATE 4: SLACK PRE-PUBLISH SCREEN -->
+        <div class="dashboard-card" id="gate4Screen" style="display: none;">
+            <div class="card-header">
+                <div>
+                    <h2 class="card-title">Gate 4: Slack Broadcast Preview</h2>
+                    <p class="card-subtitle">Review the final formatted Block Kit message containing active ticket hyperlinks</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Review Post Content</label>
+                <div class="slack-mock" id="slackPreviewContainer">
+                    <!-- Slack block preview -->
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <button class="btn btn-secondary" onclick="completeWithoutSlack()">Skip Slack & Complete</button>
+                <button class="btn btn-success" onclick="postToSlack()">🚀 Post Summary to Slack</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- LOADING OVERLAY -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+        <div class="loading-text" id="loadingText">Processing...</div>
+    </div>
+
+    <script>
+        // Global variables for caching pipeline state
+        let pipelineState = {
+            uuid: "",
+            fingerprint: "",
+            signature: "",
+            metadata: {},
+            transcriptText: "",
+            title: "",
+            date: "",
+            summary: "",
+            decisions: [],
+            action_items: [],
+            jira_users: [],
+            tickets: [],
+            mock_mode: true
+        };
+
+        const BASE_API = ""; // Relative url for same origin
+
+        // Initial setup
+        window.addEventListener('DOMContentLoaded', () => {
+            fetchConfig();
+        });
+
+        async function fetchConfig() {
+            try {
+                const response = await fetch(`${BASE_API}/api/config`);
+                const data = await response.json();
+                pipelineState.mock_mode = data.mock_mode;
+                pipelineState.jira_users = data.jira_users || [];
+                
+                const dot = document.getElementById('statusDot');
+                const text = document.getElementById('modeText');
+                
+                if (data.mock_mode) {
+                    dot.className = "status-dot mock";
+                    text.innerText = "Mock Mode Enabled (Offline)";
+                } else {
+                    dot.className = "status-dot";
+                    text.innerText = "Live Connections Enabled";
+                }
+            } catch (error) {
+                console.error("Error fetching config:", error);
+            }
+        }
+
+        // Show/hide loading indicator
+        function showLoading(show, text = "Processing...") {
+            const overlay = document.getElementById('loadingOverlay');
+            const txt = document.getElementById('loadingText');
+            txt.innerText = text;
+            overlay.style.display = show ? 'flex' : 'none';
+        }
+
+        // Steps indicator progress update
+        function updateSteps(currentStep) {
+            document.getElementById('stepLine').style.width = `${(currentStep - 1) * 33.3}%`;
+            for (let i = 1; i <= 4; i++) {
+                const step = document.getElementById(`step${i}`);
+                if (i < currentStep) {
+                    step.className = "step-item completed";
+                } else if (i === currentStep) {
+                    step.className = "step-item active";
+                } else {
+                    step.className = "step-item";
+                }
+            }
+        }
+
+        // Gate navigation helper
+        function showGate(gateNum) {
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById(`gate${i}Screen`).style.display = (i === gateNum) ? 'block' : 'none';
+            }
+            updateSteps(gateNum);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function backToGate(gateNum) {
+            showGate(gateNum);
+        }
+
+        // Gate 1: Load Default Skin Cancer meeting transcript
+        async function loadDefaultTranscript() {
+            showLoading(true, "Loading WebVTT transcript...");
+            try {
+                const response = await fetch(`${BASE_API}/api/load-default`);
+                const data = await response.json();
+                
+                document.getElementById('transcriptText').value = data.raw_text;
+                
+                // Show metadata report
+                document.getElementById('ingestedReportSection').style.display = 'block';
+                document.getElementById('metaFileName').innerText = data.metadata.file_name;
+                document.getElementById('metaFileType').innerText = data.metadata.file_type;
+                document.getElementById('metaParticipants').innerText = data.metadata.detected_participants.join(', ');
+                document.getElementById('metaDuration').innerText = data.metadata.estimated_duration;
+                
+                pipelineState.metadata = data.metadata;
+                pipelineState.fingerprint = data.fingerprint;
+                
+                showLoading(false);
+            } catch (error) {
+                showLoading(false);
+                alert("Failed to load transcript: " + error.message);
+            }
+        }
+
+        // Handle local file upload
+        async function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const formData = new FormData();
+            formData.append("file", file);
+
+            showLoading(true, "Ingesting and normalizing file...");
+            try {
+                const response = await fetch(`${BASE_API}/api/ingest`, {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+                
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+
+                document.getElementById('transcriptText').value = data.raw_text;
+                
+                // Show metadata report
+                document.getElementById('ingestedReportSection').style.display = 'block';
+                document.getElementById('metaFileName').innerText = data.metadata.file_name;
+                document.getElementById('metaFileType').innerText = data.metadata.file_type;
+                document.getElementById('metaParticipants').innerText = data.metadata.detected_participants.join(', ');
+                document.getElementById('metaDuration').innerText = data.metadata.estimated_duration;
+                
+                pipelineState.metadata = data.metadata;
+                pipelineState.fingerprint = data.fingerprint;
+                pipelineState.uuid = data.uuid;
+
+                // Handle Cache Hit scenario
+                if (data.cache_hit) {
+                    // Populate Gate 2 Screen directly with cached data
+                    document.getElementById('meetingTitle').value = data.extracted.title;
+                    document.getElementById('meetingDate').value = data.extracted.date;
+                    document.getElementById('meetingSummary').value = data.extracted.summary;
+                    
+                    pipelineState.title = data.extracted.title;
+                    pipelineState.date = data.extracted.date;
+                    pipelineState.summary = data.extracted.summary;
+                    pipelineState.decisions = data.extracted.decisions || [];
+                    pipelineState.action_items = data.extracted.action_items || [];
+                    pipelineState.signature = data.signature; // Save anti-tampering signature
+
+                    document.getElementById('cacheAlertBox').style.display = 'flex'; // Show glowing notification
+                    renderDecisions();
+                    renderActionItemsTable();
+                    
+                    showLoading(false);
+                    showGate(2);
+                    return;
+                } else {
+                    document.getElementById('cacheAlertBox').style.display = 'none';
+                }
+                showLoading(false);
+            } catch (error) {
+                showLoading(false);
+                alert("Upload failed: " + error.message);
+            }
+        }
+
+        // Proceed Gate 1 -> Gate 2 (AI Extraction)
+        async function proceedToGate2() {
+            const transcriptText = document.getElementById('transcriptText').value.trim();
+            if (!transcriptText || transcriptText.length < 50) {
+                alert("Please upload a transcript or load the default. Text must be at least 50 characters.");
+                return;
+            }
+
+            pipelineState.transcriptText = transcriptText;
+
+            // If it was loaded as default, it won't have a UUID yet. Generate if missing.
+            if (!pipelineState.uuid) {
+                // If it is a cache miss or manual click, trigger a fresh ingestion setup
+                showLoading(true, "Parsing and initializing thread...");
+                try {
+                    // Simulating upload of the current textarea content
+                    const response = await fetch(`${BASE_API}/api/ingest`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        // Helper endpoint logic handles raw text posts
+                    });
+                    // Fallback: we trigger extraction direct if setup fails, or mock uuid
+                    pipelineState.uuid = crypto.randomUUID();
+                } catch (e) {
+                    pipelineState.uuid = crypto.randomUUID();
+                }
+            }
+
+            showLoading(true, "Extracting action items with Gemini...");
+            try {
+                const response = await fetch(`${BASE_API}/api/extract`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        uuid: pipelineState.uuid,
+                        transcript: transcriptText 
+                    })
+                });
+                const data = await response.json();
+                
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+
+                // Populate Gate 2 Screen fields
+                document.getElementById('meetingTitle').value = data.extracted.title;
+                document.getElementById('meetingDate').value = data.extracted.date;
+                document.getElementById('meetingSummary').value = data.extracted.summary;
+                
+                pipelineState.title = data.extracted.title;
+                pipelineState.date = data.extracted.date;
+                pipelineState.summary = data.extracted.summary;
+                pipelineState.decisions = data.extracted.decisions || [];
+                pipelineState.action_items = data.extracted.action_items || [];
+                pipelineState.signature = data.signature; // Save anti-tampering signature
+
+                renderDecisions();
+                renderActionItemsTable();
+                
+                showLoading(false);
+                showGate(2);
+            } catch (error) {
+                showLoading(false);
+                alert("Extraction failed: " + error.message);
+            }
+        }
+
+        // Gate 2 renderers
+        function renderDecisions() {
+            const container = document.getElementById('decisionsContainer');
+            container.innerHTML = "";
+            pipelineState.decisions.forEach((dec, idx) => {
+                const row = document.createElement('div');
+                row.style.display = 'flex';
+                row.style.gap = '0.5rem';
+                row.innerHTML = `
+                    <input type="text" class="decision-input" value="${dec}" style="flex: 1;" onchange="updateDecision(${idx}, this.value)">
+                    <button class="btn btn-secondary" style="padding: 0.5rem; color: var(--accent-danger);" onclick="deleteDecisionRow(${idx})">✖</button>
+                `;
+                container.appendChild(row);
+            });
+        }
+
+        function updateDecision(idx, value) {
+            pipelineState.decisions[idx] = value;
+        }
+
+        function addDecisionRow() {
+            pipelineState.decisions.push("");
+            renderDecisions();
+        }
+
+        function deleteDecisionRow(idx) {
+            pipelineState.decisions.splice(idx, 1);
+            renderDecisions();
+        }
+
+        function renderActionItemsTable() {
+            const tbody = document.getElementById('actionItemsTableBody');
+            tbody.innerHTML = "";
+            
+            pipelineState.action_items.forEach((item, idx) => {
+                const tr = document.createElement('tr');
+                const lowConfBadge = item.confidence < 0.90 ? 
+                    `<br><span class="badge badge-low-conf">Low Conf (${Math.round(item.confidence * 100)}%)</span>` : '';
+                
+                tr.innerHTML = `
+                    <td>
+                        <input type="text" class="table-task-input" value="${item.task}" style="border: none; background: transparent; padding: 0.25rem 0;" onchange="updateActionItem(${idx}, 'task', this.value)">
+                        ${lowConfBadge}
+                    </td>
+                    <td>
+                        <input type="text" value="${item.assignee}" style="border: none; background: transparent; padding: 0.25rem 0; font-weight: 600;" onchange="updateActionItem(${idx}, 'assignee', this.value)">
+                    </td>
+                    <td>
+                        <select onchange="updateActionItem(${idx}, 'issue_type', this.value)" style="padding: 0.25rem; font-size: 0.85rem;">
+                            <option value="Task" ${item.issue_type === 'Task' ? 'selected' : ''}>Task</option>
+                            <option value="Story" ${item.issue_type === 'Story' ? 'selected' : ''}>Story</option>
+                            <option value="Bug" ${item.issue_type === 'Bug' ? 'selected' : ''}>Bug</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select onchange="updateActionItem(${idx}, 'priority', this.value)" style="padding: 0.25rem; font-size: 0.85rem;">
+                            <option value="Highest" ${item.priority === 'Highest' ? 'selected' : ''}>Highest</option>
+                            <option value="High" ${item.priority === 'High' ? 'selected' : ''}>High</option>
+                            <option value="Medium" ${item.priority === 'Medium' ? 'selected' : ''}>Medium</option>
+                            <option value="Low" ${item.priority === 'Low' ? 'selected' : ''}>Low</option>
+                            <option value="Lowest" ${item.priority === 'Lowest' ? 'selected' : ''}>Lowest</option>
+                        </select>
+                    </td>
+                    <td>
+                        <button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; color: var(--accent-danger);" onclick="deleteActionRow(${idx})">✖</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function updateActionItem(idx, field, value) {
+            pipelineState.action_items[idx][field] = value;
+        }
+
+        function addActionRow() {
+            pipelineState.action_items.push({
+                task: "New action item description...",
+                assignee: "UNKNOWN",
+                issue_type: "Task",
+                priority: "Medium",
+                confidence: 1.0
+            });
+            renderActionItemsTable();
+        }
+
+        function deleteActionRow(idx) {
+            pipelineState.action_items.splice(idx, 1);
+            renderActionItemsTable();
+        }
+
+        // Proceed Gate 2 -> Gate 3 (Jira Map Setup)
+        async function proceedToGate3() {
+            // Read title, date, summary from DOM
+            pipelineState.title = document.getElementById('meetingTitle').value;
+            pipelineState.date = document.getElementById('meetingDate').value;
+            pipelineState.summary = document.getElementById('meetingSummary').value;
+
+            showLoading(true, "Saving human edits and generating anti-tamper signature...");
+            try {
+                // Call /api/save-state to update the checkpointer and re-sign the state
+                const saveResponse = await fetch(`${BASE_API}/api/save-state`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        uuid: pipelineState.uuid,
+                        title: pipelineState.title,
+                        summary: pipelineState.summary,
+                        decisions: pipelineState.decisions,
+                        action_items: pipelineState.action_items,
+                        signature: pipelineState.signature
+                    })
+                });
+                const saveData = await saveResponse.json();
+                
+                if (saveData.error) {
+                    throw new Error(saveData.error);
+                }
+
+                // Update signature with the newly generated secure hmac token
+                pipelineState.signature = saveData.signature;
+
+                // Load mappings and active Jira directory users
+                const response = await fetch(`${BASE_API}/api/jira-users`);
+                const data = await response.json();
+                
+                pipelineState.jira_users = data.users || [];
+                pipelineState.jira_project_key = data.project_key || "OA";
+                document.getElementById('jiraProjectKeyBadge').innerText = pipelineState.jira_project_key;
+
+                renderJiraCards(data.user_mappings || {});
+                showLoading(false);
+                showGate(3);
+            } catch (error) {
+                showLoading(false);
+                alert("Failed to save and prepare Jira mappings: " + error.message);
+            }
+        }
+
+        // Gate 3 renderers: Jira Cards with user selectors
+        function renderJiraCards(mappings) {
+            const container = document.getElementById('jiraCardsContainer');
+            container.innerHTML = "";
+
+            pipelineState.action_items.forEach((item, idx) => {
+                const card = document.createElement('div');
+                
+                // Resolve mapped email
+                let resolvedEmail = mappings[item.assignee] || mappings[item.assignee.toLowerCase()] || "";
+                let selectedAccountId = item.resolvedAccountId || "";
+                
+                const isUnknown = (item.assignee === "UNKNOWN" || !resolvedEmail) && !selectedAccountId;
+                card.className = isUnknown ? "jira-card unassigned" : "jira-card";
+                
+                let userOptions = `<option value="">-- Choose Jira Assignee --</option>`;
+                pipelineState.jira_users.forEach(user => {
+                    const isSelected = (selectedAccountId && user.accountId === selectedAccountId) || 
+                                       (!selectedAccountId && resolvedEmail && user.emailAddress === resolvedEmail);
+                    
+                    if (isSelected && !item.resolvedAccountId) {
+                        item.resolvedAccountId = user.accountId;
+                    }
+
+                    userOptions += `
+                        <option value="${user.accountId}" ${isSelected ? 'selected' : ''}>
+                            ${user.displayName} (${user.emailAddress})
+                        </option>
+                    `;
+                });
+
+                const badgeClass = item.issue_type === 'Bug' ? 'badge-bug' : (item.issue_type === 'Story' ? 'badge-story' : 'badge-task');
+                
+                card.innerHTML = `
+                    <div class="jira-card-details">
+                        <div class="jira-card-task">${item.task}</div>
+                        <div class="jira-card-meta">
+                            <span class="badge ${badgeClass}">${item.issue_type}</span>
+                            <span>Priority: <strong>${item.priority}</strong></span>
+                            <span>Transcript Speaker: <strong style="${isUnknown ? 'color: var(--accent-danger);' : ''}">${item.assignee}</strong></span>
+                        </div>
+                    </div>
+                    <div>
+                        <select onchange="resolveJiraAssignee(${idx}, this.value)" style="${isUnknown ? 'border-color: var(--accent-danger); box-shadow: 0 0 5px rgba(239, 68, 68, 0.2);' : ''}">
+                            ${userOptions}
+                        </select>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        async function resolveJiraAssignee(idx, accountId) {
+            pipelineState.action_items[idx].resolvedAccountId = accountId;
+            
+            // Re-sign edited mappings on the server
+            try {
+                const response = await fetch(`${BASE_API}/api/save-state`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        uuid: pipelineState.uuid,
+                        title: pipelineState.title,
+                        summary: pipelineState.summary,
+                        decisions: pipelineState.decisions,
+                        action_items: pipelineState.action_items,
+                        signature: pipelineState.signature
+                    })
+                });
+                const data = await response.json();
+                pipelineState.signature = data.signature; // Save new HMAC
+            } catch (e) {
+                console.error("Failed to sync assignee change with server signature", e);
+            }
+            
+            proceedToGate3(); // Redraw
+        }
+
+        // Proceed Gate 3 -> Gate 4 (Sync tickets and show Slack Block Kit preview)
+        async function publishToJira() {
+            showLoading(true, "Synchronizing tickets to Jira Cloud with anti-tampering check...");
+            try {
+                const response = await fetch(`${BASE_API}/api/publish-jira`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        uuid: pipelineState.uuid,
+                        signature: pipelineState.signature
+                    })
+                });
+                const data = await response.json();
+                
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+
+                pipelineState.tickets = data.tickets || [];
+                pipelineState.signature = data.signature; // Save tickets-verified HMAC signature
+                
+                renderSlackPreview();
+                showLoading(false);
+                showGate(4);
+            } catch (error) {
+                showLoading(false);
+                alert("Jira Sync failed: " + error.message);
+            }
+        }
+
+        // Gate 4 Renderer
+        function renderSlackPreview() {
+            const container = document.getElementById('slackPreviewContainer');
+            container.innerHTML = "";
+
+            const header = document.createElement('div');
+            header.className = "slack-header";
+            header.innerText = `📝 Meeting Sync Summary: ${pipelineState.title}`;
+            container.appendChild(header);
+
+            let div = document.createElement('div');
+            div.className = "slack-divider";
+            container.appendChild(div);
+
+            const overview = document.createElement('div');
+            overview.style.marginBottom = "1rem";
+            overview.innerHTML = `<strong>Overview</strong><br>${pipelineState.summary}`;
+            container.appendChild(overview);
+
+            div = document.createElement('div');
+            div.className = "slack-divider";
+            container.appendChild(div);
+
+            if (pipelineState.decisions.length > 0) {
+                const decs = document.createElement('div');
+                decs.style.marginBottom = "1rem";
+                let listHtml = "<strong>🎯 Key Decisions</strong><br>";
+                pipelineState.decisions.forEach(d => {
+                    listHtml += `• ${d}<br>`;
+                });
+                decs.innerHTML = listHtml;
+                container.appendChild(decs);
+
+                div = document.createElement('div');
+                div.className = "slack-divider";
+                container.appendChild(div);
+            }
+
+            const ticketsBlock = document.createElement('div');
+            ticketsBlock.style.marginBottom = "1rem";
+            let ticketsHtml = "<strong>📋 Jira Action Items Created</strong><br>";
+            pipelineState.tickets.forEach(t => {
+                const icon = t.success ? "✅" : "❌";
+                if (t.success) {
+                    ticketsHtml += `${icon} <a href="${t.url}" class="slack-link" target="_blank">[${t.key}]</a> ${t.summary}<br>`;
+                    ticketsHtml += `<span style="font-size: 0.8rem; color: #888;">&nbsp;&nbsp;&nbsp;&nbsp;Type: ${t.issue_type} | Priority: ${t.priority}</span><br>`;
+                } else {
+                    ticketsHtml += `❌ Failed: ${t.summary} (Error: ${t.error})<br>`;
+                }
+            });
+            ticketsBlock.innerHTML = ticketsHtml;
+            container.appendChild(ticketsBlock);
+        }
+
+        // Post to Slack
+        async function postToSlack() {
+            showLoading(true, "Publishing summary report to Slack channel...");
+            try {
+                const response = await fetch(`${BASE_API}/api/publish-slack`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        uuid: pipelineState.uuid,
+                        signature: pipelineState.signature
+                    })
+                });
+                const data = await response.json();
+                
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+
+                showLoading(false);
+                alert("Pipeline Completed Successfully! Slack message posted.\n\n" + data.message);
+                resetDashboard();
+            } catch (error) {
+                showLoading(false);
+                alert("Slack post failed: " + error.message);
+            }
+        }
+
+        function completeWithoutSlack() {
+            alert("Pipeline Completed successfully! Jira tickets synchronized, Slack notification skipped.");
+            resetDashboard();
+        }
+
+        function resetDashboard() {
+            window.location.reload();
+        }
+    </script>
+</body>
+</html>

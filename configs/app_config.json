@@ -1,0 +1,10 @@
+{
+  "project_name": "Origin Medical Workflow Automation",
+  "mock_mode": false,
+  "confidence_threshold": 0.70,
+  "default_jira_project": "OA",
+  "default_issue_type": "Task",
+  "log_level": "INFO",
+  "rate_limit_backoff_factor": 2.0,
+  "max_retries": 3
+}

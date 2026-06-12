@@ -1,0 +1,165 @@
+WEBVTT
+
+1
+00:00:08.000 --> 00:00:13.000
+<v Nancy Collins>Okay, I think we're all on. Sarah, Priya — can you both hear me alright?</v>
+
+2
+00:00:13.000 --> 00:00:16.000
+<v Dr. Sarah Kwan>Yep, loud and clear. Hi Nancy. Hi Priya.</v>
+
+3
+00:00:16.000 --> 00:00:26.000
+<v Priya Mehta>Hi everyone! Yes, I cpython workflows/run_pipeline.py --cli --file configs/meeting_transcript.vttan hear fine. Good — I've had a running list of questions since I started drafting the patient brochure, so I'm glad we're finally doing this properly.</v>
+
+4
+00:00:26.000 --> 00:00:46.000
+<v Nancy Collins>Same. And honestly, this content really warrants a proper walkthrough. We can't just put bullet points on a page and call it done — patients need to actually understand this stuff. So Sarah, I thought we'd start from the very beginning. The basics of the sun, UV, what's actually happening to the skin. And then work through each type of lesion. Does that structure work for you?</v>
+
+5
+00:00:46.000 --> 00:01:03.000
+<v Dr. Sarah Kwan>Yeah that works perfectly. Let me just share a thought before we dive in — I think one of the biggest issues with patient education materials around skin cancer is that they either oversimplify to the point of being useless, or they go so clinical that nobody reads past the first paragraph. So let's try to hit the middle ground today.</v>
+
+6
+00:01:03.000 --> 00:01:17.000
+<v Priya Mehta>Agreed. I've been looking at what other health systems have put out and a lot of it is just — wear sunscreen, see your doctor. Which is fine, but it doesn't actually explain the why. And I think the why is what makes people change behavior.</v>
+
+7
+00:01:17.000 --> 00:01:21.000
+<v Nancy Collins>Exactly. So let's start with the sun itself. Sarah?</v>
+
+8
+00:01:21.000 --> 00:01:46.000
+<v Dr. Sarah Kwan>Sure. So the sun emits energy across a very wide spectrum of wavelengths. You've got gamma rays, X-rays, ultraviolet — which is what we'll focus on — visible light, that's your red yellow green blue that we can actually see, and then infrared, microwaves, and radio waves. Now the only portion of that entire spectrum that you can actually see is the visible light. Everything else is invisible.</v>
+
+9
+00:01:46.000 --> 00:01:52.000
+<v Priya Mehta>So people have no way of knowing how much UV they're being exposed to just by looking at the sky.</v>
+
+10
+00:01:52.000 --> 00:02:15.000
+<v Dr. Sarah Kwan>That's exactly right, and that's the key message. On a completely overcast day in the middle of winter — UV is still there. People go out without sunscreen because it looks grey and cold and they think, what's going to damage my skin today? But the UV doesn't care what the clouds look like. Clouds might filter UV by roughly the equivalent of SPF 3. That's essentially nothing.</v>
+
+11
+00:02:15.000 --> 00:02:22.000
+<v Nancy Collins>I say that to patients all the time. "Just because it's not sunny doesn't mean you're safe." And they genuinely look surprised.</v>
+
+12
+00:02:22.000 --> 00:02:37.000
+<v Dr. Sarah Kwan>It's one of the most persistent misconceptions. And it's compounded by the fact that you can't feel UV. You feel heat from infrared. You feel nothing from UV until you're already burned, and by then the damage is done.</v>
+
+13
+00:02:37.000 --> 00:02:45.000
+<v Priya Mehta>Okay so let's break down UV itself. I know there are different types — UVA, UVB, and I think UVC?</v>
+
+14
+00:02:45.000 --> 00:03:17.000
+<v Dr. Sarah Kwan>Right, three types. UVC — don't worry too much about that one. It's largely absorbed by the ozone layer and doesn't reach us in meaningful amounts. UVA is what I call the aging ray — A for aging. It penetrates deep into the dermis, it's associated with wrinkles and long-term structural damage to the skin. But importantly — and this is something a lot of people don't know — UVA is strongly associated with melanoma. And it penetrates untreated window glass completely.</v>
+
+15
+00:03:17.000 --> 00:03:20.000
+<v Priya Mehta>Wait — window glass doesn't block it at all?</v>
+
+16
+00:03:20.000 --> 00:03:45.000
+<v Dr. Sarah Kwan>Regular window glass, your office window, your car window — they do not filter UVA. So if you're sitting by a window all day, you're getting UVA exposure on whatever skin is facing the window. I actually had a patient once — a truck driver — whose left side of the face was dramatically more aged and wrinkled than the right. Just from decades of driving with his left side toward the window.</v>
+
+17
+00:03:45.000 --> 00:04:40.000
+<v Nancy Collins>That's such a striking image. It really drives the point home. Priya, can we include that in the brochure? Like describe that scenario without identifying anyone?</v>
+
+18
+00:04:40.000 --> 00:04:48.000
+<v Dr. Sarah Kwan>Absolutely, it's not a unique case. It's actually been documented in the medical literature. There are published photos of exactly that scenario. Go ahead and use it, Priya.</v>
+
+19
+00:04:48.000 --> 00:04:59.000
+<v Priya Mehta>I will write that up and include it. What about UVB, Sarah?</v>
+
+20
+00:04:59.000 --> 00:05:03.000
+<v Dr. Sarah Kwan>UVB is the burning ray — B for burning. It's primarily responsible for the sunburn you feel, and it's more associated with the common types of skin cancer, basal cell and squamous cell. When you see SPF — sun protection factor — on a sunscreen bottle, that number is specifically about UVB protection. UVB is present all day but it's strongest roughly between 9 AM and 4 PM. And in terms of penetration — UVB mostly affects the outer layer of the skin, the epidermis. UVA goes much deeper into the dermis. Something like: UVA ages the skin from deep within and doesn't get blocked by windows. UVB burns the surface and drives the most common skin cancers. Both cause DNA damage. Both increase cancer risk. Both need to be blocked.</v>
+
+21
+00:05:03.000 --> 00:05:15.000
+<v Priya Mehta>That's really clean. I'll use that framing for the brochure. Let's get into how UV actually causes skin cancer mechanically.</v>
+
+22
+00:05:15.000 --> 00:05:40.000
+<v Dr. Sarah Kwan>So the skin has three main layers. You have the epidermis — the outermost layer that constantly renews. Then the dermis underneath, which contains your collagen, your elastin — the structural proteins. And then the fat layer below that. The epidermis takes about two weeks to fully mature. What UV does — it hits the DNA inside skin cells and causes mutations. If you get enough cumulative damage over time, those mutations can cause cells to start dividing faster and less controlled. And uncontrolled cell division is essentially what a tumor is.</v>
+
+23
+00:05:40.000 --> 00:06:47.000
+<v Nancy Collins>And different cell types give rise to different cancers? Like basal versus squamous versus melanoma?</v>
+
+24
+00:06:47.000 --> 00:06:52.000
+<v Dr. Sarah Kwan>Exactly. Basal cells and squamous cells are keratinocytes — the main structural cells of the epidermis. Melanoma arises from melanocytes, which are the pigment-producing cells. These are completely different cell types with different biology, behaviors, and risks. Patients sometimes ask whether squamous cell can turn into melanoma and the answer is no — they come from completely unrelated cell populations. Priya, let's make sure you address this as a specific FAQ: 'Can one type of skin cancer turn into another?'.</v>
+
+25
+00:06:52.000 --> 00:07:07.000
+<v Priya Mehta>Okay, that's a FAQ I'll definitely address in the draft. Short answer: no, biologically they are independent.</v>
+
+26
+00:07:07.000 --> 00:07:12.000
+<v Dr. Sarah Kwan>Good. Let's walk through basal cell in detail first since it's the most common. It's slow-growing, it very rarely spreads to other organs. But it will keep growing locally and cause tissue damage. Most basal cells tend to look shiny, with visible small vessels and raised or rolled borders. The most common is the nodular type. Classic presentation — shiny bump, rolled border, visible vessels, usually on the head or neck. Then there's superficial basal cell, which looks like a patch of eczema. Slightly scaly, red, shiny on closer inspection.</v>
+
+27
+00:07:12.000 --> 00:07:48.000
+<v Nancy Collins>The superficial type is the one that gets missed the longest, in my experience.</v>
+
+28
+00:07:48.000 --> 00:08:19.000
+<v Dr. Sarah Kwan>Completely. And then there's pigmented basal cell — this one people sometimes confuse with melanoma because it has dark coloration. Then there's the morpheaform or scar-like type. It's firm, slightly shiny, sometimes has a faint rolled edge. These can actually be a bit more aggressive and are less well-defined. In terms of treatment options: curettage and electrodesiccation (scraping and burning) works well for superficial or small focal lesions. Then there's standard excision — cutting it out with margins around the tumor, usually in an elliptical shape.</v>
+
+29
+00:08:19.000 --> 00:08:56.000
+<v Priya Mehta>Why does the scar end up so much bigger than the original spot? That's going to confuse patients.</v>
+
+30
+00:08:56.000 --> 00:09:03.000
+<v Dr. Sarah Kwan>The geometry is the answer. You take a margin of normal tissue all the way around, converting it into a circle. To close a circle cleanly without puckering, you surgically convert it into an ellipse by cutting small triangles at each end. The final scar ends up being about three times the length of the original lesion. Priya, please explain this surgical geometry clearly in the brochure so patients aren't surprised by scar sizes.</v>
+
+31
+00:09:03.000 --> 00:09:46.000
+<v Priya Mehta>That's incredibly helpful. I will write an explanation of that. What about Mohs surgery?</v>
+
+32
+00:09:46.000 --> 00:09:53.000
+<v Dr. Sarah Kwan>Mohs surgery is staged removal under microscopic control. Used for cosmetically sensitive areas like the face, head, and neck. The surgeon takes a layer, maps it, and processes it in a lab on site to ensure 100% margin clearance. It's highly tissue-sparing. Non-surgical options for superficial types include topical imiquimod (Aldara) or topical 5-fluorouracil (5-FU). They trigger immune responses or target cancer cells. Note that these creams cause local reactions like redness and crusting, which can look alarming but indicates the treatment is working. Priya, put a bold warning in the brochure about these topical reactions so patients don't stop treatment thinking they're having an allergic reaction.</v>
+
+33
+00:09:53.000 --> 00:10:29.000
+<v Priya Mehta>Understood. I will add a prominent warning section for topical creams. What about PDT?</v>
+
+34
+00:10:29.000 --> 00:10:56.000
+<v Dr. Sarah Kwan>Photodynamic therapy (PDT) is used for widespread precancerous lesions (actinic keratoses). You apply a photosensitizing agent, let it absorb, and expose the area to a specialized light. It feels quite hot or burning during treatment, and it makes the skin extremely sun-sensitive immediately afterward. Priya, make sure the aftercare section has a strict warning on sun avoidance for 48 hours post-PDT.</v>
+
+35
+00:10:56.000 --> 00:11:32.000
+<v Priya Mehta>Got it. Strict sun avoidance for 48 hours. I'll make sure that is highlighted.</v>
+
+36
+00:11:32.000 --> 00:11:38.000
+<v Dr. Sarah Kwan>Great. For melanoma, it's the most serious skin cancer and carries real mortality risk. Childhood sunburns and tanning bed usage are huge risk factors. 80% of cumulative lifetime sun damage occurs before age 18. For prevention: people need to apply a full ounce of sunscreen to cover the body (a shot glass size). Most under-apply, which reduces protection exponentially. Recommend broad-spectrum mineral sunscreens containing zinc oxide (like Neutrogena Sheer Zinc or EltaMD) because they are stable and reflect both UVA and UVB. Also, recommend UPF 50+ clothing (like Coolibar) as a primary defense.</v>
+
+37
+00:11:38.000 --> 00:12:25.000
+<v Nancy Collins>And check the UV index regularly. Sarah, what are the next steps for us on this project?</v>
+
+38
+00:12:25.000 --> 00:12:31.000
+<v Dr. Sarah Kwan>Well, there are a couple of action items. Priya needs to compile these writing points, draft the sections on excision geometry, FAQ, topical cream reactions, and PDT aftercare, and integrate the mineral sunscreen recommendations. I will review the draft once it's ready. Nancy, you should set up our next sync for two weeks from now, once the draft is finalized.</v>
+
+39
+00:12:31.000 --> 00:12:48.000
+<v Nancy Collins>Sounds like a plan. I will schedule the follow-up meeting now for two weeks out. Priya, let's try to get the draft finished by next Friday so Sarah has time to review it. Can you do that?</v>
+
+40
+00:12:48.000 --> 00:13:00.000
+<v Priya Mehta>Yes, I'll have the draft sent to Sarah by next Friday. I'll get started on those specific sections today.</v>
+
+41
+00:13:00.000 --> 00:13:20.000
+<v Nancy Collins>Excellent. Thanks, everyone. Speak in two weeks.</v>
