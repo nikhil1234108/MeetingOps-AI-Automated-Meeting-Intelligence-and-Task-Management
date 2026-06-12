@@ -23,3 +23,6 @@ zoom_transcript (1).vtt
 # IDE configurations
 .vscode/
 .idea/
+
+# Exclude interview notes from GitHub
+docs/interview_notes.md
