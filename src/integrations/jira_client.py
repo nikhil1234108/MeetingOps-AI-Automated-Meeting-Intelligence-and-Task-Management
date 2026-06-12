@@ -95,14 +95,39 @@ class JiraClient:
                 logger.error(f"Failed to fetch Jira users: HTTP {response.status_code}")
                 return []
             
+            # Load user mappings to enrich emails if missing from API
+            user_mappings = {}
+            mappings_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "configs", "user_mappings.json"))
+            if os.path.exists(mappings_path):
+                try:
+                    with open(mappings_path, 'r') as f:
+                        user_mappings = json.load(f)
+                except Exception as e:
+                    logger.error(f"Failed to load user_mappings in get_users: {e}")
+
             users = response.json()
             formatted_users = []
             for u in users:
                 if u.get("accountType") == "atlassian" and u.get("active"):
+                    display_name = u.get("displayName", "")
+                    email = u.get("emailAddress")
+                    
+                    # If email is missing or generic, try lookup in user_mappings
+                    if not email or email == "no-email@atlassian.com":
+                        email = user_mappings.get(display_name)
+                        if not email:
+                            # Try case-insensitive or partial matching
+                            for name, val in user_mappings.items():
+                                if name.lower() in display_name.lower() or display_name.lower() in name.lower():
+                                    email = val
+                                    break
+                        if not email:
+                            email = "no-email@atlassian.com"
+                            
                     formatted_users.append({
                         "accountId": u.get("accountId"),
-                        "displayName": u.get("displayName"),
-                        "emailAddress": u.get("emailAddress", "no-email@atlassian.com")
+                        "displayName": display_name,
+                        "emailAddress": email
                     })
             return formatted_users
         except Exception as e:
