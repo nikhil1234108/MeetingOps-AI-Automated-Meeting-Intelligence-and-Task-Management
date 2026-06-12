@@ -160,6 +160,16 @@ async def run_cli_pipeline(file_path: str):
         ticket_res["assignee"] = speaker
         created_tickets.append(ticket_res)
 
+        # Save ticket in database for persistence/pgAdmin visibility
+        if ticket_res.get("success"):
+            await Database.save_jira_ticket(
+                run_uuid=run_uuid,
+                ticket_key=ticket_res["key"],
+                ticket_url=ticket_res["url"],
+                summary=ticket_res["summary"],
+                issue_type=ticket_res["issue_type"]
+            )
+
     # Phase 6: Slack Posting (Mock or Live)
     slack_client = SlackClient(mock_mode=mock_mode)
     logger.info("Posting summary notification to Slack...")
