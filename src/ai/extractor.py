@@ -49,7 +49,7 @@ class AIExtractor:
             try:
                 # Initialize ChatGoogleGenerativeAI (LangChain binding)
                 self.model = ChatGoogleGenerativeAI(
-                    model="gemini-1.5-flash", # LangChain Gemini 1.5 stable flash
+                    model="gemini-2.5-flash", # LangChain Gemini 2.5 stable flash
                     google_api_key=self.api_key,
                     temperature=0.1
                 )

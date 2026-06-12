@@ -10,7 +10,7 @@ WEBVTT
 
 3
 00:00:16.000 --> 00:00:26.000
-<v Priya Mehta>Hi everyone! Yes, I cpython workflows/run_pipeline.py --cli --file configs/meeting_transcript.vttan hear fine. Good — I've had a running list of questions since I started drafting the patient brochure, so I'm glad we're finally doing this properly.</v>
+<v Priya Mehta>Hi everyone! Yes, I can hear fine. Good — I've had a running list of questions since I started drafting the patient brochure, so I'm glad we're finally doing this properly.</v>
 
 4
 00:00:26.000 --> 00:00:46.000
@@ -65,101 +65,657 @@ WEBVTT
 <v Dr. Sarah Kwan>Regular window glass, your office window, your car window — they do not filter UVA. So if you're sitting by a window all day, you're getting UVA exposure on whatever skin is facing the window. I actually had a patient once — a truck driver — whose left side of the face was dramatically more aged and wrinkled than the right. Just from decades of driving with his left side toward the window.</v>
 
 17
-00:03:45.000 --> 00:04:40.000
-<v Nancy Collins>That's such a striking image. It really drives the point home. Priya, can we include that in the brochure? Like describe that scenario without identifying anyone?</v>
+00:03:45.000 --> 00:03:49.000
+<v Nancy Collins>That's such a striking image. It really drives the point home.</v>
 
 18
-00:04:40.000 --> 00:04:48.000
-<v Dr. Sarah Kwan>Absolutely, it's not a unique case. It's actually been documented in the medical literature. There are published photos of exactly that scenario. Go ahead and use it, Priya.</v>
+00:03:49.000 --> 00:03:54.000
+<v Priya Mehta>Can we include that in the brochure? Like describe that scenario without identifying anyone?</v>
 
 19
-00:04:48.000 --> 00:04:59.000
-<v Priya Mehta>I will write that up and include it. What about UVB, Sarah?</v>
+00:03:54.000 --> 00:04:02.000
+<v Dr. Sarah Kwan>Absolutely, it's not a unique case. It's actually been documented in the medical literature. There are published photos of exactly that scenario. Go ahead and use it.</v>
 
 20
-00:04:59.000 --> 00:05:03.000
-<v Dr. Sarah Kwan>UVB is the burning ray — B for burning. It's primarily responsible for the sunburn you feel, and it's more associated with the common types of skin cancer, basal cell and squamous cell. When you see SPF — sun protection factor — on a sunscreen bottle, that number is specifically about UVB protection. UVB is present all day but it's strongest roughly between 9 AM and 4 PM. And in terms of penetration — UVB mostly affects the outer layer of the skin, the epidermis. UVA goes much deeper into the dermis. Something like: UVA ages the skin from deep within and doesn't get blocked by windows. UVB burns the surface and drives the most common skin cancers. Both cause DNA damage. Both increase cancer risk. Both need to be blocked.</v>
+00:04:02.000 --> 00:04:05.000
+<v Nancy Collins>Good. What about UVB, Sarah?</v>
 
 21
-00:05:03.000 --> 00:05:15.000
-<v Priya Mehta>That's really clean. I'll use that framing for the brochure. Let's get into how UV actually causes skin cancer mechanically.</v>
+00:04:05.000 --> 00:04:40.000
+<v Dr. Sarah Kwan>UVB is the burning ray — B for burning. It's primarily responsible for the sunburn you feel, and it's more associated with the common types of skin cancer, basal cell and squamous cell. When you see SPF — sun protection factor — on a sunscreen bottle, that number is specifically about UVB protection. UVB is present all day but it's strongest roughly between 9 AM and 4 PM. And in terms of penetration — UVB mostly affects the outer layer of the skin, the epidermis. UVA goes much deeper into the dermis.</v>
 
 22
-00:05:15.000 --> 00:05:40.000
-<v Dr. Sarah Kwan>So the skin has three main layers. You have the epidermis — the outermost layer that constantly renews. Then the dermis underneath, which contains your collagen, your elastin — the structural proteins. And then the fat layer below that. The epidermis takes about two weeks to fully mature. What UV does — it hits the DNA inside skin cells and causes mutations. If you get enough cumulative damage over time, those mutations can cause cells to start dividing faster and less controlled. And uncontrolled cell division is essentially what a tumor is.</v>
+00:04:40.000 --> 00:04:46.000
+<v Priya Mehta>So for the brochure, is there a simple way to summarize that without getting too technical?</v>
 
 23
-00:05:40.000 --> 00:06:47.000
-<v Nancy Collins>And different cell types give rise to different cancers? Like basal versus squamous versus melanoma?</v>
+00:04:46.000 --> 00:04:59.000
+<v Dr. Sarah Kwan>Something like: UVA ages the skin from deep within and doesn't get blocked by windows. UVB burns the surface and drives the most common skin cancers. Both cause DNA damage. Both increase cancer risk. Both need to be blocked.</v>
 
 24
-00:06:47.000 --> 00:06:52.000
-<v Dr. Sarah Kwan>Exactly. Basal cells and squamous cells are keratinocytes — the main structural cells of the epidermis. Melanoma arises from melanocytes, which are the pigment-producing cells. These are completely different cell types with different biology, behaviors, and risks. Patients sometimes ask whether squamous cell can turn into melanoma and the answer is no — they come from completely unrelated cell populations. Priya, let's make sure you address this as a specific FAQ: 'Can one type of skin cancer turn into another?'.</v>
+00:04:59.000 --> 00:05:03.000
+<v Priya Mehta>That's really clean. I'll use that framing.</v>
 
 25
-00:06:52.000 --> 00:07:07.000
-<v Priya Mehta>Okay, that's a FAQ I'll definitely address in the draft. Short answer: no, biologically they are independent.</v>
+00:05:03.000 --> 00:05:15.000
+<v Nancy Collins>Okay. Let's get into how UV actually causes skin cancer mechanically, because I think patients often just hear "UV is bad" without understanding what's actually happening at the cellular level.</v>
 
 26
-00:07:07.000 --> 00:07:12.000
-<v Dr. Sarah Kwan>Good. Let's walk through basal cell in detail first since it's the most common. It's slow-growing, it very rarely spreads to other organs. But it will keep growing locally and cause tissue damage. Most basal cells tend to look shiny, with visible small vessels and raised or rolled borders. The most common is the nodular type. Classic presentation — shiny bump, rolled border, visible vessels, usually on the head or neck. Then there's superficial basal cell, which looks like a patch of eczema. Slightly scaly, red, shiny on closer inspection.</v>
+00:05:15.000 --> 00:05:40.000
+<v Dr. Sarah Kwan>So the skin has three main layers. You have the epidermis — the outermost layer that constantly renews and exfoliates. Then the dermis underneath, which contains your collagen, your elastin — the structural proteins that give skin its firmness and elasticity. And then the fat layer below that. The epidermis takes about two weeks to fully mature from the bottom cell layer up to the surface.</v>
 
 27
-00:07:12.000 --> 00:07:48.000
-<v Nancy Collins>The superficial type is the one that gets missed the longest, in my experience.</v>
+00:05:40.000 --> 00:05:43.000
+<v Priya Mehta>Two weeks — that's faster than I would have guessed.</v>
 
 28
-00:07:48.000 --> 00:08:19.000
-<v Dr. Sarah Kwan>Completely. And then there's pigmented basal cell — this one people sometimes confuse with melanoma because it has dark coloration. Then there's the morpheaform or scar-like type. It's firm, slightly shiny, sometimes has a faint rolled edge. These can actually be a bit more aggressive and are less well-defined. In terms of treatment options: curettage and electrodesiccation (scraping and burning) works well for superficial or small focal lesions. Then there's standard excision — cutting it out with margins around the tumor, usually in an elliptical shape.</v>
+00:05:43.000 --> 00:06:12.000
+<v Dr. Sarah Kwan>It's a very active tissue. So what UV does — it hits the DNA inside skin cells and causes changes. Mutations. Now your body has repair mechanisms, and most of the time it catches these and fixes them. But if you get enough cumulative damage over time, those mutations can cause cells to start dividing faster and less controlled. And uncontrolled cell division is essentially what a tumor is.</v>
 
 29
-00:08:19.000 --> 00:08:56.000
-<v Priya Mehta>Why does the scar end up so much bigger than the original spot? That's going to confuse patients.</v>
+00:06:12.000 --> 00:06:16.000
+<v Nancy Collins>And different cell types give rise to different cancers?</v>
 
 30
-00:08:56.000 --> 00:09:03.000
-<v Dr. Sarah Kwan>The geometry is the answer. You take a margin of normal tissue all the way around, converting it into a circle. To close a circle cleanly without puckering, you surgically convert it into an ellipse by cutting small triangles at each end. The final scar ends up being about three times the length of the original lesion. Priya, please explain this surgical geometry clearly in the brochure so patients aren't surprised by scar sizes.</v>
+00:06:16.000 --> 00:06:47.000
+<v Dr. Sarah Kwan>Exactly. Basal cells and squamous cells are keratinocytes — the main structural cells of the epidermis. Melanoma arises from melanocytes, which are the pigment- producing cells. These are completely different cell types with different biology, different behaviors, and different risks. I want to stress that because patients sometimes ask whether squamous cell can turn into melanoma and the answer is no — they come from completely unrelated cell populations.</v>
 
 31
-00:09:03.000 --> 00:09:46.000
-<v Priya Mehta>That's incredibly helpful. I will write an explanation of that. What about Mohs surgery?</v>
+00:06:47.000 --> 00:06:52.000
+<v Priya Mehta>Okay that's a FAQ I'll definitely address. "Can one type turn into another?"</v>
 
 32
-00:09:46.000 --> 00:09:53.000
-<v Dr. Sarah Kwan>Mohs surgery is staged removal under microscopic control. Used for cosmetically sensitive areas like the face, head, and neck. The surgeon takes a layer, maps it, and processes it in a lab on site to ensure 100% margin clearance. It's highly tissue-sparing. Non-surgical options for superficial types include topical imiquimod (Aldara) or topical 5-fluorouracil (5-FU). They trigger immune responses or target cancer cells. Note that these creams cause local reactions like redness and crusting, which can look alarming but indicates the treatment is working. Priya, put a bold warning in the brochure about these topical reactions so patients don't stop treatment thinking they're having an allergic reaction.</v>
+00:06:52.000 --> 00:07:07.000
+<v Dr. Sarah Kwan>Good one to clarify. Short answer: no. They're not related. Having one type does increase your overall risk of other types just because you share the same risk factors — sun exposure, fair skin, etc. — but biologically they're independent.</v>
 
 33
-00:09:53.000 --> 00:10:29.000
-<v Priya Mehta>Understood. I will add a prominent warning section for topical creams. What about PDT?</v>
+00:07:07.000 --> 00:07:12.000
+<v Nancy Collins>Let's walk through basal cell in detail first since it's the most common.</v>
 
 34
-00:10:29.000 --> 00:10:56.000
-<v Dr. Sarah Kwan>Photodynamic therapy (PDT) is used for widespread precancerous lesions (actinic keratoses). You apply a photosensitizing agent, let it absorb, and expose the area to a specialized light. It feels quite hot or burning during treatment, and it makes the skin extremely sun-sensitive immediately afterward. Priya, make sure the aftercare section has a strict warning on sun avoidance for 48 hours post-PDT.</v>
+00:07:12.000 --> 00:07:48.000
+<v Dr. Sarah Kwan>Right, most common by a significant margin. Millions of cases per year in the US and the numbers have been increasing over the past decade. One surprising finding — the biggest increase has been in women. It's slow-growing, it very rarely spreads to other organs. Even if you leave it alone for years it's not going to suddenly show up in your liver. But that doesn't mean you ignore it — it will keep growing locally, can cause significant tissue damage if left on the face long enough, and people who have one have a higher risk of developing more.</v>
 
 35
-00:10:56.000 --> 00:11:32.000
-<v Priya Mehta>Got it. Strict sun avoidance for 48 hours. I'll make sure that is highlighted.</v>
+00:07:48.000 --> 00:07:53.000
+<v Priya Mehta>What does it look like? That's the hardest part to convey in writing.</v>
 
 36
-00:11:32.000 --> 00:11:38.000
-<v Dr. Sarah Kwan>Great. For melanoma, it's the most serious skin cancer and carries real mortality risk. Childhood sunburns and tanning bed usage are huge risk factors. 80% of cumulative lifetime sun damage occurs before age 18. For prevention: people need to apply a full ounce of sunscreen to cover the body (a shot glass size). Most under-apply, which reduces protection exponentially. Recommend broad-spectrum mineral sunscreens containing zinc oxide (like Neutrogena Sheer Zinc or EltaMD) because they are stable and reflect both UVA and UVB. Also, recommend UPF 50+ clothing (like Coolibar) as a primary defense.</v>
+00:07:53.000 --> 00:08:19.000
+<v Dr. Sarah Kwan>It's genuinely tricky because it can look very different depending on the subtype. But there are some common threads. Most basal cells tend to look shiny. They often have some visible small vessels on the surface if you look closely. Sometimes the borders are raised or rolled — like the edges are slightly thicker than the center. But beyond that, the subtypes look quite different.</v>
 
 37
-00:11:38.000 --> 00:12:25.000
-<v Nancy Collins>And check the UV index regularly. Sarah, what are the next steps for us on this project?</v>
+00:08:19.000 --> 00:08:21.000
+<v Priya Mehta>Walk me through the subtypes?</v>
 
 38
-00:12:25.000 --> 00:12:31.000
-<v Dr. Sarah Kwan>Well, there are a couple of action items. Priya needs to compile these writing points, draft the sections on excision geometry, FAQ, topical cream reactions, and PDT aftercare, and integrate the mineral sunscreen recommendations. I will review the draft once it's ready. Nancy, you should set up our next sync for two weeks from now, once the draft is finalized.</v>
+00:08:21.000 --> 00:08:56.000
+<v Dr. Sarah Kwan>So the most common is the nodular type. Classic presentation — shiny bump, rolled border, visible vessels, usually on the head or neck. Looks like it doesn't belong there. Then there's superficial basal cell, which is the tricky one — it can honestly look like a patch of eczema. Slightly scaly, sometimes a little red, shiny on closer inspection. Some patients make ten or fifteen of these. There does seem to be a genetic component to that pattern, and you see it more in younger people.</v>
 
 39
-00:12:31.000 --> 00:12:48.000
-<v Nancy Collins>Sounds like a plan. I will schedule the follow-up meeting now for two weeks out. Priya, let's try to get the draft finished by next Friday so Sarah has time to review it. Can you do that?</v>
+00:08:56.000 --> 00:09:03.000
+<v Nancy Collins>The superficial type is the one that gets missed the longest, in my experience. People think it's dry skin or a rash for years.</v>
 
 40
-00:12:48.000 --> 00:13:00.000
-<v Priya Mehta>Yes, I'll have the draft sent to Sarah by next Friday. I'll get started on those specific sections today.</v>
+00:09:03.000 --> 00:09:46.000
+<v Dr. Sarah Kwan>Completely. And then there's pigmented basal cell — this one people sometimes confuse with melanoma because it has dark coloration. But if you look closely, you'll see those characteristic vessels and the shiny quality, and the color is just part of the skin cancer itself, not a melanocytic process. Then there's the morpheaform or scar-like type. Patients come in and say, I have this scar but I don't remember injuring myself there. It's firm, slightly shiny, sometimes has a faint rolled edge. These can actually be a bit more aggressive and are less well-defined — the edges blur into normal skin.</v>
 
 41
-00:13:00.000 --> 00:13:20.000
-<v Nancy Collins>Excellent. Thanks, everyone. Speak in two weeks.</v>
+00:09:46.000 --> 00:09:53.000
+<v Priya Mehta>And treatment — should we cover all the options in the brochure or just point people toward their doctor?</v>
+
+42
+00:09:53.000 --> 00:10:29.000
+<v Dr. Sarah Kwan>I think a basic overview helps because patients feel less anxious when they know what to expect going in. So the main surgical options — curettage and electrodesiccation, which is essentially scraping and burning. We numb the area, use a tool called a curette to scrape the tumor — and basal cell actually has a different texture than normal skin, it's softer and more gelatinous, so you can feel when you've reached normal tissue — then cauterize, then scrape again to confirm. Works well for superficial or small focal lesions.</v>
+
+43
+00:10:29.000 --> 00:10:33.000
+<v Priya Mehta>I didn't know you could feel the difference in texture. That's interesting.</v>
+
+44
+00:10:33.000 --> 00:10:56.000
+<v Dr. Sarah Kwan>It's one of those tactile clinical skills. Normal skin feels firm and resilient. Basal cell scrapes off like soft gelatin. You keep going until it all feels normal. Then there's standard excision — cutting it out with margins around the tumor, usually in a football or elliptical shape. People always ask why the scar is so much bigger than the original spot.</v>
+
+45
+00:10:56.000 --> 00:10:58.000
+<v Nancy Collins>That question comes up constantly.</v>
+
+46
+00:10:58.000 --> 00:11:32.000
+<v Dr. Sarah Kwan>The geometry is the answer. You have a small spot, you take a margin of normal tissue all the way around it. Now you have a circle. You can't just stitch a circle closed — you'd end up with two puckered ends sticking up. So surgically you convert it into an ellipse by cutting small triangles at each end. Those triangles end up being roughly the same width as the excision itself, so the final scar ends up being about three times the length of the original lesion. It's just practical surgical geometry.</v>
+
+47
+00:11:32.000 --> 00:11:38.000
+<v Priya Mehta>That explanation will save a lot of post-operative confusion. Can I include that in the brochure?</v>
+
+48
+00:11:38.000 --> 00:12:25.000
+<v Dr. Sarah Kwan>Please do. Then there's Mohs surgery — that's the specialized technique named after Dr. Frederic Mohs who developed it. It's used for tumors in cosmetically sensitive or difficult locations — face, head, neck, around the eyes, ears, nose — or for large lesions, recurrent ones, or those with poorly defined borders. The idea is staged removal under microscopic control. The surgeon takes a layer of tissue, maps it into quadrants, and processes it in a specialized lab right there on site. They can look at it under the microscope and say, there are still cancer cells in this corner — and then they go back and take only that specific area instead of going all the way around again. Much more tissue-sparing.</v>
+
+49
+00:12:25.000 --> 00:12:31.000
+<v Nancy Collins>Mohs is really remarkable. The outcomes in terms of scar size compared to standard excision are significant.</v>
+
+50
+00:12:31.000 --> 00:12:48.000
+<v Dr. Sarah Kwan>Significant, and the cure rates are higher for appropriate lesions because you have complete margin control. You know exactly when you're clear. Whereas with standard excision you send the tissue to pathology, you wait a few days, and you hope the margins came back clear.</v>
+
+51
+00:12:48.000 --> 00:12:51.000
+<v Priya Mehta>Are there non-surgical options?</v>
+
+52
+00:12:51.000 --> 00:13:24.000
+<v Dr. Sarah Kwan>For superficial types, yes. Topical imiquimod — brand name Aldara — which is an immune response modifier. It essentially triggers your immune system to attack the cancer cells. And topical 5-fluorouracil, which is a chemotherapy agent applied as a cream. Both are also used for precancerous lesions. One thing worth warning patients about with these creams — they often cause a reaction that extends beyond where you applied the cream. Looks alarming. Redness, crusting, sometimes oozing.</v>
+
+53
+00:13:24.000 --> 00:13:27.000
+<v Priya Mehta>I imagine that freaks people out.</v>
+
+54
+00:13:27.000 --> 00:13:51.000
+<v Dr. Sarah Kwan>Absolutely. But it actually makes sense. Superficial basal cell extends further than it looks on the surface — so the medication is reacting to cancer cells that were invisible. And surrounding sun-damaged skin also reacts, just less intensely. It means the treatment is working. But patients need to be told that upfront, otherwise they stop using it thinking they're having an allergic reaction.</v>
+
+55
+00:13:51.000 --> 00:13:57.000
+<v Nancy Collins>That's a very important patient education point. I'll make sure it's prominent in the brochure.</v>
+
+56
+00:13:57.000 --> 00:14:05.000
+<v Dr. Sarah Kwan>There's also radiation therapy, but that's reserved for people who aren't surgical candidates. Not a first-line option.</v>
+
+57
+00:14:05.000 --> 00:14:10.000
+<v Priya Mehta>What about follow-up after treatment? How often should patients be seen?</v>
+
+58
+00:14:10.000 --> 00:14:40.000
+<v Dr. Sarah Kwan>After a first basal cell — every six months for the first year. Then annually if nothing new develops. The reason for the intensive first year is that having one basal cell significantly raises your risk of developing more — and also your risk of squamous cell and melanoma, because you share the same risk factors. People with basal cell need to understand that this isn't a one-and- done situation. They're now in a monitoring program essentially for life.</v>
+
+59
+00:14:40.000 --> 00:14:46.000
+<v Nancy Collins>Let's move on to squamous cell. What's the key differentiation patients should understand?</v>
+
+60
+00:14:46.000 --> 00:15:19.000
+<v Dr. Sarah Kwan>So squamous cell is the second most common type of skin cancer. Similar trend — millions of cases per year in the US, increasing over the last decade, again more so in women for reasons we don't fully understand. It looks different from basal cell. Usually presents as a firm, scaly, sometimes crusted bump — often on sun-exposed skin like the scalp, ears, back of the hands, face. Can bleed. Sometimes there's a little horn of hardened skin projecting from it.</v>
+
+61
+00:15:19.000 --> 00:15:21.000
+<v Priya Mehta>A horn of skin?</v>
+
+62
+00:15:21.000 --> 00:15:38.000
+<v Dr. Sarah Kwan>A cutaneous horn, yes. It's an accumulation of hardened keratin — skin protein — that projects outward. It can look quite dramatic but it's the underlying lesion that matters. Sometimes that base is squamous cell, sometimes it's something benign. But you always biopsy it.</v>
+
+63
+00:15:38.000 --> 00:15:41.000
+<v Nancy Collins>And squamous cell can grow quickly?</v>
+
+64
+00:15:41.000 --> 00:16:03.000
+<v Dr. Sarah Kwan>Some subtypes, yes. There's a type called keratoacanthoma that's a subtype of squamous cell — it can grow over the course of a week or two. Patients come in alarmed because it appeared so fast. I've seen cases where someone had nothing, and three weeks later there's this significant nodule. The fast growth is actually characteristic for that subtype.</v>
+
+65
+00:16:03.000 --> 00:16:07.000
+<v Priya Mehta>How does the risk of spreading compare to basal cell?</v>
+
+66
+00:16:07.000 --> 00:16:45.000
+<v Dr. Sarah Kwan>Somewhat higher than basal cell, but I want to put that in context. In practice, squamous cells in the typical sun-exposed locations — face, scalp, arms — rarely metastasize. The higher-risk sites are the lip and the inside of the mouth, because they're anatomically closer to lymph node drainage. Lesions that arise from chronic wounds, scars, or areas of prior radiation exposure also carry higher risk. But a typical squamous cell on the back of the hand or the scalp — with appropriate treatment — is not something patients need to be panicked about.</v>
+
+67
+00:16:45.000 --> 00:16:52.000
+<v Nancy Collins>That nuance matters because "it can spread" without that context causes disproportionate anxiety.</v>
+
+68
+00:16:52.000 --> 00:17:18.000
+<v Dr. Sarah Kwan>Exactly. Context is everything. Treatment for squamous cell is essentially the same approach as basal cell — excision, curettage for superficial types, Mohs for cosmetically sensitive or difficult locations, topicals for superficial variants. Radiation for poor surgical candidates. Same follow-up protocol too. Once you've had squamous cell, you're in a regular monitoring program.</v>
+
+69
+00:17:18.000 --> 00:17:27.000
+<v Priya Mehta>Let's talk about precancerous spots. Actinic keratoses — these seem to cause a lot of patient confusion. Is it cancer or isn't it?</v>
+
+70
+00:17:27.000 --> 00:18:08.000
+<v Dr. Sarah Kwan>Good question, and the short answer is: they're not cancer, but they're on the pathway toward it. Actinic keratoses sit on a spectrum — you have photo-damaged skin as the baseline, then actinic keratoses as the precancerous lesion, then Bowen's disease which is a very superficial squamous cell that hasn't yet invaded deeper, and then full invasive squamous cell. So they represent an intermediate stage. The risk of any individual actinic keratosis becoming cancer is actually not that high, but it depends on factors — thickness, how long they've been there, how many you have.</v>
+
+71
+00:18:08.000 --> 00:18:13.000
+<v Nancy Collins>And patients often describe these as dry patches that won't go away, right?</v>
+
+72
+00:18:13.000 --> 00:18:40.000
+<v Dr. Sarah Kwan>Exactly. They're classic for that. "I thought it was just dry skin and I've been moisturizing it for six months and it doesn't change." They're usually more felt than seen — this rough, sandpapery texture. They can be anywhere from barely there to quite thick and scaly. Sometimes they're a little red. You often see them diffusely across the face, scalp, arms — areas of heavy lifetime sun exposure.</v>
+
+73
+00:18:40.000 --> 00:18:45.000
+<v Priya Mehta>Can they hurt? I feel like patients expect skin cancer to be painless.</v>
+
+74
+00:18:45.000 --> 00:19:03.000
+<v Dr. Sarah Kwan>Interestingly, actinic keratoses are often more symptomatic than actual skin cancers. Patients describe them stinging, burning, itching, sometimes bleeding. Which is actually one reason they end up coming in — the precancerous spot is bothering them more than the actual cancer nearby would.</v>
+
+75
+00:19:03.000 --> 00:19:08.000
+<v Nancy Collins>[laughs] Which is useful in a way — the symptom brings them in early.</v>
+
+76
+00:19:08.000 --> 00:19:35.000
+<v Dr. Sarah Kwan>Exactly. Unintended benefit. Treatment — for isolated spots, liquid nitrogen is the most common approach. Quick, effective, localized frostbite to the area that destroys the abnormal cells. But if someone has them diffusely across a large area — and some patients have them everywhere, the whole scalp, the entire face, both forearms — you can't just spot-treat everything. You need a field treatment.</v>
+
+77
+00:19:35.000 --> 00:19:40.000
+<v Priya Mehta>Field treatment meaning treating the whole area even where you can't see lesions?</v>
+
+78
+00:19:40.000 --> 00:20:10.000
+<v Dr. Sarah Kwan>Correct, because the whole area has underlying UV damage even if individual keratoses aren't visible yet. So we use topical 5-FU or imiquimod applied broadly to the region. Or photodynamic therapy — PDT. That's where you apply a photosensitizing agent to the skin, let it absorb for about an hour, and then expose the area to a red or blue light that activates the agent and selectively destroys precancerous cells.</v>
+
+79
+00:20:10.000 --> 00:20:13.000
+<v Priya Mehta>How does PDT feel? Is it painful?</v>
+
+80
+00:20:13.000 --> 00:20:48.000
+<v Dr. Sarah Kwan>Honestly? Uncomfortable to quite painful depending on the person. Patients describe it as their face — or wherever the treated area is — feeling like it's on fire. They're given a fan to cool themselves down during the light exposure session. But the results are good. You see significant clearing, much smoother skin once everything heals over. For patients with widespread precancerous lesions, the temporary discomfort is worth it versus repeatedly spot-treating with liquid nitrogen for years.</v>
+
+81
+00:20:48.000 --> 00:20:55.000
+<v Nancy Collins>I've had patients go through it and they say the results are dramatic. They show me before and afters and it really is striking.</v>
+
+82
+00:20:55.000 --> 00:21:10.000
+<v Dr. Sarah Kwan>It works really well. One thing to flag for patient education — PDT makes the treated skin extremely sun-sensitive for a period afterward. Patients need to be very strict about sun avoidance immediately post-treatment.</v>
+
+83
+00:21:10.000 --> 00:21:22.000
+<v Priya Mehta>I'll add that to the aftercare section. Okay — melanoma. I feel like we need to spend serious time on this one because it carries the most fear and also the most misconceptions.</v>
+
+84
+00:21:22.000 --> 00:21:51.000
+<v Dr. Sarah Kwan>Agreed. So melanoma is the one that everyone worries about and for good reason — it's the skin cancer that carries real mortality risk. The numbers put it in perspective. In 2008 there were over 62,000 new cases in the US and more than 8,400 deaths. And the lifetime risk of melanoma has been increasing over the decades. Partly behavioral — changing habits around sun exposure and tanning.</v>
+
+85
+00:21:51.000 --> 00:21:55.000
+<v Nancy Collins>The tanning culture shift starting in the mid-twentieth century.</v>
+
+86
+00:21:55.000 --> 00:22:26.000
+<v Dr. Sarah Kwan>Right. Go back to the early 1900s — people were trying to keep their skin out of the sun. Hats were standard outdoor wear. Pallor was fashionable. Then somewhere in the mid-twentieth century — some of this is attributed to Coco Chanel popularizing the tan look — the cultural ideal flipped completely. And then you add tanning beds into the mix in the 80s and 90s, and you have generations of deliberate UV exposure with no protection.</v>
+
+87
+00:22:26.000 --> 00:22:32.000
+<v Priya Mehta>And melanoma disproportionately affects younger people, right? That's surprising.</v>
+
+88
+00:22:32.000 --> 00:22:56.000
+<v Dr. Sarah Kwan>It does, and this is something we really need to get into the materials. Melanoma affects all ages, but the highest incidence in women is actually in the 25-to-29 age group. Twenty-five to twenty-nine. People completely associate skin cancer with being elderly, but melanoma in particular is a young person's cancer too. The tanning bed generation is now hitting that age bracket.</v>
+
+89
+00:22:56.000 --> 00:23:00.000
+<v Nancy Collins>That statistic always stops people in their tracks.</v>
+
+90
+00:23:00.000 --> 00:23:22.000
+<v Dr. Sarah Kwan>It should. Then you do also have a different pattern in older patients — a type called lentigo maligna melanoma that tends to develop in very elderly patients with extensive lifetime sun damage, usually on the head and face. That's more the chronic accumulation pattern. But the overall landscape includes both young and old.</v>
+
+91
+00:23:22.000 --> 00:23:26.000
+<v Priya Mehta>Risk factors for melanoma specifically?</v>
+
+92
+00:23:26.000 --> 00:24:18.000
+<v Dr. Sarah Kwan>Age, because cumulative exposure goes up. Fair skin — and redheads are particularly vulnerable. The pigmentation in lighter skin types, especially in true redheads, is essentially a less protective form. It's sometimes described as a leaky umbrella over the DNA — it lets UV through in ways that a more protective pigment type doesn't. Lowered immunity is a significant risk factor — organ transplant patients on immunosuppressants are at substantially higher risk. UV exposure — and this is nuanced — for melanoma specifically, the pattern of exposure matters. It's not just chronic accumulation. Intense, intermittent sunburns, particularly in childhood, carry a strong association with melanoma risk later in life. And tanning bed use.</v>
+
+93
+00:24:18.000 --> 00:24:27.000
+<v Nancy Collins>The childhood sunburn connection is so important and so underappreciated. People think the damage from that burn is gone once the redness fades.</v>
+
+94
+00:24:27.000 --> 00:24:55.000
+<v Dr. Sarah Kwan>The skin looks healed but the DNA damage is there. And there's actually a statistic worth including — about 80% of cumulative lifetime sun damage occurs before age 18. So the foundation for a lot of what shows up in adulthood is being laid during childhood. Which is why protecting kids now matters enormously — not just for their present skin, but for their risk profile in their 40s, 50s, and beyond.</v>
+
+95
+00:24:55.000 --> 00:25:02.000
+<v Priya Mehta>That's a really powerful motivator for parents. "Protect your kids now or deal with the consequences in twenty years."</v>
+
+96
+00:25:02.000 --> 00:25:18.000
+<v Dr. Sarah Kwan>And it's not abstract — the photo damage from childhood typically starts becoming visually apparent when people are in their late 20s and 30s. You didn't see it accumulating but suddenly at 32 you're noticing spots and wrinkles that weren't there a couple years ago.</v>
+
+97
+00:25:18.000 --> 00:25:26.000
+<v Nancy Collins>What should people be looking for in terms of melanoma appearance? The ABCDE rule — how useful is it actually?</v>
+
+98
+00:25:26.000 --> 00:25:52.000
+<v Dr. Sarah Kwan>It's a useful starting framework but I want to complicate it a bit, because I think people apply it too rigidly and get falsely reassured. ABCDE stands for asymmetry, border irregularity, color variation, diameter over six millimeters, and evolution — meaning it's changing. Now, of all five of those, E is the only one that should dominate your thinking.</v>
+
+99
+00:25:52.000 --> 00:25:55.000
+<v Priya Mehta>Why evolution specifically?</v>
+
+100
+00:25:55.000 --> 00:26:30.000
+<v Dr. Sarah Kwan>Because I have seen melanomas that are tiny — less than six millimeters, so they'd "pass" the D criterion. Symmetrical — so they'd "pass" the A criterion. Single, uniform dark color — so they'd pass C. But they're melanoma. What made them stand out was that they looked darker than everything else, or different from everything else on that person's skin. Or they changed over a few months. If you're only checking the ABCDE boxes you might look at something like that and think, it's small and symmetric, I'm fine.</v>
+
+101
+00:26:30.000 --> 00:26:38.000
+<v Nancy Collins>And the one that doesn't fit in with the rest of your moles — even if it looks technically normal by ABCDE — that's worth getting checked.</v>
+
+102
+00:26:38.000 --> 00:27:15.000
+<v Dr. Sarah Kwan>That's the "ugly duckling" concept. Each person has their own pattern of moles. If all your moles look somewhat irregular and varied, that's your personal normal. The one that breaks your pattern is the one to watch. And some people make a lot of atypical-looking moles where all of them look a bit worrying — we call those dysplastic nevi — and in those patients we're specifically watching for the one that looks different from all the others. Not just whether it's technically irregular, but whether it stands out.</v>
+
+103
+00:27:15.000 --> 00:27:19.000
+<v Priya Mehta>What do the different subtypes of melanoma look like?</v>
+
+104
+00:27:19.000 --> 00:28:12.000
+<v Dr. Sarah Kwan>There are several. The most visually stereotypical is superficial spreading melanoma — usually has that irregular border, multiple shades of brown, black, sometimes red or blue. Then there's nodular melanoma which tends to be uniformly dark and can grow quite fast. Acral lentiginous melanoma occurs on palms, soles, or under nails — this one is more common in darker-skinned individuals and sometimes gets missed because it's in unusual locations. And then there are amelanotic melanomas — not colored at all or barely pigmented. These are particularly tricky because they don't look like the classic dark melanoma images people have in their heads. I've personally had patients treated for months for what seemed like a benign lesion and it turned out to be amelanotic melanoma.</v>
+
+105
+00:28:12.000 --> 00:28:17.000
+<v Nancy Collins>The amelanotic ones are the ones that keep me up at night. No visual cue.</v>
+
+106
+00:28:17.000 --> 00:28:28.000
+<v Dr. Sarah Kwan>Exactly. Which is again why the rule is — if something isn't responding to treatment, or behaving the way you'd expect, come back. Don't let it ride.</v>
+
+107
+00:28:28.000 --> 00:28:36.000
+<v Priya Mehta>What's the treatment for melanoma when it is caught? Because I think patients hear "melanoma" and immediately assume the worst.</v>
+
+108
+00:28:36.000 --> 00:28:58.000
+<v Dr. Sarah Kwan>Prognosis depends enormously on thickness and stage at diagnosis. Melanoma has very high cure rates when caught early — when it's thin and hasn't penetrated into the dermis. For the thinnest melanomas — no penetrance into the dermis — you take five-millimeter margins around the whole thing and cut it out. That's it.</v>
+
+109
+00:28:58.000 --> 00:29:04.000
+<v Nancy Collins>So for thin melanoma caught early, the surgical treatment is actually quite manageable.</v>
+
+110
+00:29:04.000 --> 00:29:46.000
+<v Dr. Sarah Kwan>Completely. As the depth increases — we measure thickness in millimeters, it's called Breslow depth — the margins we take increase. Between zero and one millimeter depth, we typically take one-centimeter margins. Beyond one millimeter, we sometimes need two-centimeter margins. And for anything over one millimeter, we also consider sentinel lymph node biopsy — where an oncologist injects a dye that follows the lymphatic drainage from the tumor, and any nodes that light up get examined. That tells us whether the melanoma has started spreading to the lymph system.</v>
+
+111
+00:29:46.000 --> 00:29:49.000
+<v Priya Mehta>And for metastatic melanoma?</v>
+
+112
+00:29:49.000 --> 00:30:28.000
+<v Dr. Sarah Kwan>There are now a number of systemic treatments — immunotherapy, targeted therapies. The field has actually changed dramatically in the last fifteen years. Some of what used to be a death sentence now has real treatment options. But that's getting into oncology territory beyond our materials for this brochure. The point for patients is: don't panic, but don't wait. Thin melanoma is very curable. Advanced melanoma is much harder to treat. The time from "I'll get that checked eventually" to a meaningfully worse prognosis can be surprisingly short with certain subtypes.</v>
+
+113
+00:30:28.000 --> 00:30:31.000
+<v Nancy Collins>What's the follow-up schedule for melanoma patients?</v>
+
+114
+00:30:31.000 --> 00:31:03.000
+<v Dr. Sarah Kwan>More intensive than for basal or squamous cell. After a melanoma diagnosis — every three to four months in the first year. Then every six months from years two through ten. After ten years with no recurrence, you can move to annual checks. And anyone with a first-degree relative who had melanoma should be getting regular skin checks, period. They're at elevated risk even without a personal history.</v>
+
+115
+00:31:03.000 --> 00:31:06.000
+<v Priya Mehta>And in between scheduled appointments?</v>
+
+116
+00:31:06.000 --> 00:31:17.000
+<v Dr. Sarah Kwan>Any new or changing lesion, don't wait for the next appointment. Come in. That's the standing instruction for all skin cancer patients but especially melanoma.</v>
+
+117
+00:31:17.000 --> 00:31:30.000
+<v Nancy Collins>Let's shift to photo aging because it comes up constantly in patient conversations and I think it belongs in our materials even though it's not cancer. People care about it and it opens the door to talking about sun protection.</v>
+
+118
+00:31:30.000 --> 00:32:05.000
+<v Dr. Sarah Kwan>Good instinct. So photo aging is different from chronological aging. Chronological aging is what happens to everyone just from time — if you spent your whole life in a cave with zero sun exposure, your skin would still age. But photo aging is UV-accelerated damage on top of that. The deep wrinkles, the leathery texture, the enlarged pores, those tiny red vessels on the nose and cheeks, the pigmentation changes — age spots, solar lentigines — all of that is predominantly UV-driven, not just time.</v>
+
+119
+00:32:05.000 --> 00:32:10.000
+<v Priya Mehta>How does UV cause the structural changes — the leathering and wrinkling?</v>
+
+120
+00:32:10.000 --> 00:32:33.000
+<v Dr. Sarah Kwan>UVA penetrates into the dermis and triggers enzymes that break down collagen and elastin — those structural proteins that give skin its firmness and elasticity. You lose that scaffolding over time. The skin sags, loses volume, and the surface wrinkles. It's not just surface-level — the deep structural protein network is being dismantled.</v>
+
+121
+00:32:33.000 --> 00:32:39.000
+<v Nancy Collins>What about actinic purpura? I have a lot of older patients who ask about the easy bruising.</v>
+
+122
+00:32:39.000 --> 00:33:18.000
+<v Dr. Sarah Kwan>Actinic purpura is really just the visible result of thinned, UV-damaged skin. All the layers thin as we age — both chronologically and from UV damage. Collagen and elastin break down, the dermis gets thinner, and the blood vessels end up sitting closer to the surface. So minor trauma — just bumping into a counter — ruptures those vessels and you get bruising that seems disproportionate to the injury. It's not dangerous but it's hard to treat. Some patients use arnica — either oral supplements or topical bruise creams — to help the resolution speed. But prevention is really the only answer.</v>
+
+123
+00:33:18.000 --> 00:33:26.000
+<v Priya Mehta>There's also the white spots that people get on their legs and arms — I see patients mention those a lot as they get older.</v>
+
+124
+00:33:26.000 --> 00:33:54.000
+<v Dr. Sarah Kwan>Idiopathic guttate hypomelanosis. Those are spots where UV has actually damaged the pigment-producing cells in that location. Those spots can't tan anymore because the melanocytes there are non-functional. They become especially noticeable when the surrounding skin tans because the contrast increases. Not dangerous, not reversible. Sun protection won't reverse what's already there but it prevents new ones.</v>
+
+125
+00:33:54.000 --> 00:34:02.000
+<v Nancy Collins>Okay — let's spend real time on prevention now. Because patients know they should do things but the specifics matter.</v>
+
+126
+00:34:02.000 --> 00:34:37.000
+<v Dr. Sarah Kwan>Right. Sunscreen first since it's the one people think they know but mostly get wrong. The number one thing that almost no one does correctly — the amount. To get the SPF listed on the bottle, you need to apply one full ounce to your whole body. A full ounce. That's essentially a shot glass worth of sunscreen for full body coverage. Nobody does that. People put on a thin film and think they're at SPF 50 but they might be functionally getting the protection of SPF 10 or 15.</v>
+
+127
+00:34:37.000 --> 00:34:41.000
+<v Priya Mehta>That's genuinely alarming. How do you fix that?</v>
+
+128
+00:34:41.000 --> 00:35:14.000
+<v Dr. Sarah Kwan>Two strategies. One — just use more product, layer it on more thickly than feels natural. Two — go to a higher SPF. Here's the math: protection doesn't degrade linearly with under-application. If you put on half the recommended amount, you don't get half the SPF. You get roughly the square root of it — it's an exponential relationship. So if you're consistently under-applying, going from SPF 30 to SPF 50 or higher gives you a meaningful real-world buffer.</v>
+
+129
+00:35:14.000 --> 00:35:19.000
+<v Priya Mehta>So the old argument that SPF 30 and SPF 50 are essentially the same —</v>
+
+130
+00:35:19.000 --> 00:35:48.000
+<v Dr. Sarah Kwan>That argument assumes perfect application. Which doesn't happen in real life. Under real-world conditions, higher SPF does provide meaningfully more protection. There was a study that actually exposed people to UV and measured skin reactions based on the SPF they used — the higher-SPF group had measurably less UV-induced redness even accounting for the same application behavior. So yes, go higher.</v>
+
+131
+00:35:48.000 --> 00:35:53.000
+<v Nancy Collins>What about the SPF 100 products? Is there a ceiling where it stops mattering?</v>
+
+132
+00:35:53.000 --> 00:36:22.000
+<v Dr. Sarah Kwan>Mathematically, the differences at very high numbers are small — the gap between SPF 50 and SPF 100 is less than the gap between SPF 15 and SPF 30. But given under-application is ubiquitous, having that higher ceiling isn't a bad thing. And it's definitely not harmful to use a high SPF. If someone's asking whether to use SPF 110, the answer is yes, go ahead. There's no downside.</v>
+
+133
+00:36:22.000 --> 00:36:26.000
+<v Priya Mehta>What about broad-spectrum — what does that mean exactly?</v>
+
+134
+00:36:26.000 --> 00:36:54.000
+<v Dr. Sarah Kwan>The SPF number by itself only tells you about UVB protection. Broad-spectrum on the label means the product has been tested and confirmed to also provide UVA protection. You want broad-spectrum. Without it, you might be adequately blocking UVB — preventing sunburn — but still allowing UVA to penetrate and cause deep damage and aging. Feeling like you didn't burn is not evidence that you were protected.</v>
+
+135
+00:36:54.000 --> 00:37:00.000
+<v Priya Mehta>Chemical versus mineral sunscreens — is this something we should take a position on in the brochure?</v>
+
+136
+00:37:00.000 --> 00:37:48.000
+<v Dr. Sarah Kwan>I have a personal preference but I can frame it neutrally for the brochure. Chemical sunscreens — things like avobenzone, oxybenzone — work by absorbing UV and converting it to heat. Mineral sunscreens — zinc oxide and titanium dioxide — work by physically reflecting and scattering UV. I personally prefer mineral because zinc oxide in particular covers a very broad spectrum, it's extremely stable — zinc is just zinc, it doesn't degrade meaningfully over time — and it's gentler for sensitive skin. The environmental concern with some chemical sunscreen ingredients — particularly oxybenzone — around coral reef damage is real. If you're in the ocean, mineral is the better choice.</v>
+
+137
+00:37:48.000 --> 00:37:54.000
+<v Priya Mehta>The white cast issue — patients push back on mineral sunscreens because of that.</v>
+
+138
+00:37:54.000 --> 00:38:38.000
+<v Dr. Sarah Kwan>Completely valid concern and there are good solutions now. Tinted mineral sunscreens are widely available and essentially invisible on the skin. For brand recommendations that are easy to find — Sheer Zinc by Neutrogena is good, it's SPF 50, 21% zinc oxide, mineral-only, available in most drugstores. EltaMD is a favorite in dermatology offices — very sheer, glides on, barely noticeable. COTZ — C-O-T-Z — is another one, especially good for very sensitive skin. And for clothing brands with UPF ratings, Coolibar — C-O-O-L-I-B-A-R — Sol Umbra, UV Skinz are all solid options.</v>
+
+139
+00:38:38.000 --> 00:38:43.000
+<v Nancy Collins>What about lip protection? I feel like people forget lips completely.</v>
+
+140
+00:38:43.000 --> 00:39:10.000
+<v Dr. Sarah Kwan>Lips are a high-risk site for squamous cell carcinoma — as we mentioned, the lip is anatomically closer to lymph node drainage. COTZ makes a mineral sunscreen specifically for lips. EltaMD has a lip sunscreen too. Standard chapstick with SPF is better than nothing but most of those contain chemical filters. For someone with very sun-exposed lips, I'd specifically seek out a mineral lip sunscreen.</v>
+
+141
+00:39:10.000 --> 00:39:16.000
+<v Priya Mehta>What about forgotten areas generally? Ears, scalp, back of the neck?</v>
+
+142
+00:39:16.000 --> 00:39:50.000
+<v Dr. Sarah Kwan>Ears are consistently under-protected and they're a common site for basal cell and squamous cell. Same with the scalp — men who are thinning or bald especially, but women with parts in their hair too. The back of the neck. The tops of the hands — hands are almost always sun-exposed and people rarely put sunscreen there. And the décolletage — the upper chest area. You can always tell someone's lifetime sun exposure by looking at the back of their hands and the skin of their chest.</v>
+
+143
+00:39:50.000 --> 00:39:56.000
+<v Nancy Collins>I tell every patient — your hands will tell the truth about your sun history even if your face doesn't.</v>
+
+144
+00:39:56.000 --> 00:40:14.000
+<v Dr. Sarah Kwan>Exactly. And reapplication — people apply in the morning and consider it done. Water resistant does not mean waterproof. If you're sweating or swimming, reapply immediately when you get out of the water. Generally reapply every two hours with outdoor activity regardless.</v>
+
+145
+00:40:14.000 --> 00:40:22.000
+<v Priya Mehta>What about sunscreen expiration? Someone on our team asked about using sunscreen that's been in their beach bag for a couple years.</v>
+
+146
+00:40:22.000 --> 00:41:00.000
+<v Dr. Sarah Kwan>Mineral sunscreens — zinc and titanium — are very stable. Zinc oxide is essentially just zinc oxide, it doesn't degrade. Even if the listed expiration date has passed, if the texture and smell are unchanged, a mineral sunscreen is probably still effective. Chemical sunscreens are a different story — the active compounds can degrade over time, especially if exposed to heat or light. If a chemical sunscreen has been sitting in a hot car or in direct sunlight, I'd replace it. If it smells off, definitely replace it.</v>
+
+147
+00:41:00.000 --> 00:41:05.000
+<v Priya Mehta>Okay. Clothing and physical protection — how do we frame that?</v>
+
+148
+00:41:05.000 --> 00:42:01.000
+<v Dr. Sarah Kwan>Clothing is genuinely underrated. A regular white t-shirt is roughly UPF 8 — meaning it lets through about an eighth of UV that would otherwise hit the skin. That's actually not great protection. But UPF-rated clothing can be 50+. The key is the fabric — synthetic fibers like polyester tend to have tighter weaves and provide more protection than cotton. Thicker is generally better. Wet clothing loses some of its UV protection too. For people who are outdoors a lot, UPF clothing is a really worthwhile investment. Wide-brim hat — four inches of brim ideally. Sunglasses — UV400 rated. Neck drapes and sun sleeves for activities like golf or hiking. Umbrella if you're in direct sun for extended periods — no stigma around that. You see it all the time in places like Hawaii and Japan.</v>
+
+149
+00:42:01.000 --> 00:42:08.000
+<v Nancy Collins>Window film — we talked about this earlier for the car and home. Should we include a recommendation in the brochure?</v>
+
+150
+00:42:08.000 --> 00:42:52.000
+<v Dr. Sarah Kwan>Definitely worth mentioning as an option for people who commute or spend a lot of time near windows. Window film that's specifically UV-blocking — not just tinted, but UV-rated — filters out about 99% of UVA. It can be completely clear, the UV blocking doesn't require a visual tint. Professional installation for cars is recommended because the curved glass is very difficult to DIY. For home windows, you can find services through local providers. It's a one-time cost that protects both your skin and your furnishings — UV fades carpets, wood, and fabrics significantly.</v>
+
+151
+00:42:52.000 --> 00:42:57.000
+<v Priya Mehta>The practical benefit to furniture is genuinely a useful extra argument.</v>
+
+152
+00:42:57.000 --> 00:43:09.000
+<v Dr. Sarah Kwan>People who are skeptical of investing in UV film for "just skin" are often more convinced when they realize it also stops their hardwood floor from bleaching and their curtains from fading.</v>
+
+153
+00:43:09.000 --> 00:43:13.000
+<v Nancy Collins>What about vitamin D? That's going to come up.</v>
+
+154
+00:43:13.000 --> 00:43:55.000
+<v Dr. Sarah Kwan>It comes up in every conversation. The concern is: if I'm blocking UV, am I blocking vitamin D synthesis? First — not everyone synthesizes vitamin D efficiently through the skin anyway. There are people who live at the equator, get sun exposure constantly, and are still vitamin D deficient. Skin pigmentation, age, and individual variation all affect synthesis. Second — you can get vitamin D reliably through diet and supplements. Fish, fortified foods, vitamin D3 supplements. That's a much safer and more controllable source than deliberate sun exposure. The idea of skipping sunscreen to get vitamin D is a bad trade.</v>
+
+155
+00:43:55.000 --> 00:44:00.000
+<v Priya Mehta>For the brochure, should we recommend a specific supplement amount?</v>
+
+156
+00:44:00.000 --> 00:44:15.000
+<v Dr. Sarah Kwan>I'd stay out of specific supplement dosing — that varies by individual and should come from their primary care doctor. Just note that vitamin D is available from dietary sources and supplements, and that this is a safer route than UV exposure.</v>
+
+157
+00:44:15.000 --> 00:44:19.000
+<v Nancy Collins>Peak hours — should we give specific times?</v>
+
+158
+00:44:19.000 --> 00:45:00.000
+<v Dr. Sarah Kwan>UVB is strongest roughly between 9 AM and 4 PM. UV index peaks around solar noon, which varies by season. I always tell patients to check the UV index for their location — you can Google "UV index" and it'll show you. In Southern California on a clear summer day, the UV index regularly hits 9 or 10 — which is in the "very high" category. Most people have no idea it's that intense. If you can arrange outdoor activity in the early morning or late afternoon, do that. But if you have to be out during peak hours, full sun protection — not skipped sunscreen.</v>
+
+159
+00:45:00.000 --> 00:45:05.000
+<v Priya Mehta>What about oral sun protection supplements? I've seen those advertised.</v>
+
+160
+00:45:05.000 --> 00:45:45.000
+<v Dr. Sarah Kwan>There are a couple — Heliocare and astaxanthin are the main ones. These are not a replacement for sunscreen — that's critical. But there's some evidence they can provide an additional layer of internal protection against UV damage. Antioxidant mechanisms mostly. If someone knows they're going to be out for an extended period, taking one of these on top of their regular sunscreen and protective clothing is a reasonable additional step. They're available over the counter — CVS, similar drugstores. But again: these are supplemental, not substitutes.</v>
+
+161
+00:45:45.000 --> 00:45:58.000
+<v Nancy Collins>Good. I think we're getting close to wrapping up. Let me ask about questions that patients frequently bring up that we haven't covered. Tanning beds — I know you touched on it but any specifics?</v>
+
+162
+00:45:58.000 --> 00:46:38.000
+<v Dr. Sarah Kwan>Tanning beds primarily emit UVA — the aging and melanoma-associated ray. There is no medically meaningful benefit from a cosmetic tan. If someone wants to look tan, self-tanning agents are the safe option. They don't provide any SPF on their own — they're just a cosmetic dye — but they're not causing damage. And the "base tan" myth — that getting a base tan before vacation protects you from burning — is exactly that, a myth. A tan is evidence of skin damage, not protection. The actual protection factor of a tan is minimal.</v>
+
+163
+00:46:38.000 --> 00:46:41.000
+<v Priya Mehta>The base tan myth is so persistent.</v>
+
+164
+00:46:41.000 --> 00:47:10.000
+<v Dr. Sarah Kwan>Very. Related — being in water increases UV penetration because of refraction. Water effectively increases the angle and intensity of UV rays hitting submerged skin. That's why people often get more burned on a day at the beach swimming than just sitting in the same sun on land. Surfers, divers, open-water swimmers — full rash guards are genuinely appropriate. UPF-rated full body coverage.</v>
+
+165
+00:47:10.000 --> 00:47:19.000
+<v Nancy Collins>One more thing I want to make sure is in there — the drug interactions. Patients on certain medications who need to know their risk is higher.</v>
+
+166
+00:47:19.000 --> 00:47:50.000
+<v Dr. Sarah Kwan>Most importantly — immunosuppressive medications. Primarily cyclosporine and similar drugs used after organ transplants to prevent rejection. These suppress the immune system, which normally plays a role in detecting and destroying early cancer cells. Transplant patients on these medications have substantially higher risk of squamous cell carcinoma especially. They need more intensive dermatology monitoring and stricter sun protection than the average patient.</v>
+
+167
+00:47:50.000 --> 00:47:55.000
+<v Priya Mehta>What about chemotherapy? Patients in cancer treatment often ask this.</v>
+
+168
+00:47:55.000 --> 00:48:28.000
+<v Dr. Sarah Kwan>Depends on how immunosuppressive the specific chemotherapy regimen is. Some do increase susceptibility. If someone is on chemo for any reason, their oncology team should be advising them on this — but strict sun protection during treatment is generally prudent. Oral steroids — long-term chronic use — I'm less concerned about from a skin cancer standpoint, though chronic steroids have plenty of other skin effects. The main concern is immunosuppression and that's primarily the transplant-type medications.</v>
+
+169
+00:48:28.000 --> 00:48:35.000
+<v Nancy Collins>How often should an average person who has never had skin cancer see a dermatologist?</v>
+
+170
+00:48:35.000 --> 00:49:12.000
+<v Dr. Sarah Kwan>Once a year for a full-body skin check is the recommendation for adults — especially if you have significant sun exposure history, fair skin, lots of moles, or family history of skin cancer. Between annual checks, if anything new appears or something changes, come in earlier. Patients sometimes think they need to wait for their annual. They don't. If something looks different and you're worried — come in, get it looked at. Most of the time it's nothing, and occasionally it's exactly the kind of thing that's much better caught early.</v>
+
+171
+00:49:12.000 --> 00:49:17.000
+<v Priya Mehta>And what about self-examination? Should patients be doing that?</v>
+
+172
+00:49:17.000 --> 00:49:46.000
+<v Dr. Sarah Kwan>Yes. Monthly self-checks. Full-body, good lighting, use a mirror for areas you can't see directly — back, back of the scalp. And ideally a partner who can check your back and scalp. People often don't know they have something on their back until someone else notices it. Building a habit of knowing what your skin normally looks like makes it much easier to notice when something is new or different.</v>
+
+173
+00:49:46.000 --> 00:49:51.000
+<v Nancy Collins>Perfect. Priya, do you have everything you need for the brochure?</v>
+
+174
+00:49:51.000 --> 00:50:28.000
+<v Priya Mehta>I think so — this has been incredibly thorough. My main action items are: add the UV-through-windows section, include the truck driver example, clarify the ABCDE limitations and the ugly duckling concept, add the age 25-29 melanoma statistic, clarify squamous-to-melanoma question explicitly, add the over-application note for sunscreen, include the specific brand recommendations, add the PDT discomfort and aftercare notes, and include the drug interaction section with transplant medications. I'll have a draft to both of you by end of week.</v>
+
+175
+00:50:28.000 --> 00:50:36.000
+<v Dr. Sarah Kwan>That sounds great. And if anything comes up as you're writing, just ping me — happy to clarify over email so we don't have to schedule another call.</v>
+
+176
+00:50:36.000 --> 00:50:43.000
+<v Nancy Collins>Agreed. Sarah, this was incredibly thorough and useful. Thank you so much for your time — I know you're busy.</v>
+
+177
+00:50:43.000 --> 00:50:54.000
+<v Dr. Sarah Kwan>My pleasure. This stuff genuinely matters. The more patients actually understand the why behind sun protection, the more they actually do it. So good materials are worth the effort.</v>
+
+178
+00:50:54.000 --> 00:51:00.000
+<v Nancy Collins>Absolutely. Alright everyone — have a great rest of the week. We'll talk soon.</v>
+
+179
+00:51:00.000 --> 00:51:02.000
+<v Priya Mehta>Thanks both! Bye!</v>
+
+180
+00:51:02.000 --> 00:51:07.000
+<v Dr. Sarah Kwan>Bye everyone.</v>
