@@ -89,6 +89,67 @@ class TestWorkflowAutomation(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(validated.action_items[0].assignee, "Priya")
         self.assertIn(validated.action_items[0].issue_type, ["Task", "Story", "Bug"])
 
+    async def test_action_item_reranking(self):
+        """Verifies deterministic action item sorting by priority and confidence descending."""
+        from src.ai.graph import rerank_action_items
+        
+        test_state = {
+            "uuid": "test-uuid",
+            "action_items": [
+                {"task": "Low Priority Item", "assignee": "Priya", "issue_type": "Story", "priority": "Low", "confidence": 0.95},
+                {"task": "Highest Priority Item 1", "assignee": "Sarah", "issue_type": "Task", "priority": "Highest", "confidence": 0.80},
+                {"task": "Highest Priority Item 2", "assignee": "Nancy", "issue_type": "Bug", "priority": "Highest", "confidence": 0.95},
+                {"task": "Medium Priority Item", "assignee": "Priya", "issue_type": "Story", "priority": "Medium", "confidence": 0.90}
+            ]
+        }
+        
+        result = await rerank_action_items(test_state)
+        sorted_items = result["action_items"]
+        
+        # Check sort order: Highest (0) to Lowest (4), and then confidence desc (0.95 before 0.80)
+        self.assertEqual(sorted_items[0]["task"], "Highest Priority Item 2")
+        self.assertEqual(sorted_items[1]["task"], "Highest Priority Item 1")
+        self.assertEqual(sorted_items[2]["task"], "Medium Priority Item")
+        self.assertEqual(sorted_items[3]["task"], "Low Priority Item")
+
+    async def test_cyclic_graph_routing(self):
+        """Verifies state graph routing decisions for feedback and sync errors."""
+        from src.ai.graph import route_after_jira_map, route_after_sync
+        
+        # Scenario 1: Feedback present, retry count under limit
+        state_feedback = {"feedback": "Fix assignees", "retry_count": 0}
+        self.assertEqual(route_after_jira_map(state_feedback), "extract")
+        
+        # Scenario 2: Feedback present, retry count hits limit
+        state_max_retry = {"feedback": "Fix assignees", "retry_count": 3}
+        self.assertEqual(route_after_jira_map(state_max_retry), "sync_jira")
+        
+        # Scenario 3: Feedback empty/None
+        state_no_feedback = {"feedback": None, "retry_count": 0}
+        self.assertEqual(route_after_jira_map(state_no_feedback), "sync_jira")
+        
+        # Scenario 4: Sync successful
+        state_sync_success = {"tickets": [{"success": True, "key": "OA-1"}], "error": ""}
+        self.assertEqual(route_after_sync(state_sync_success), "slack_notify")
+        
+        # Scenario 5: Sync failure
+        state_sync_fail = {"tickets": [{"success": False, "error": "Failed"}], "error": ""}
+        self.assertEqual(route_after_sync(state_sync_fail), "jira_map")
+        
+        # Scenario 6: Sync exception/error in state
+        state_sync_error = {"tickets": [], "error": "Fatal Error"}
+        self.assertEqual(route_after_sync(state_sync_error), "jira_map")
+
+    async def test_ai_extractor_feedback_mock(self):
+        """Verifies AIExtractor processes feedback correctly in mock mode."""
+        extractor = AIExtractor(mock_mode=True)
+        
+        # Test assign Nancy instruction
+        extracted = await extractor.extract("Mock transcript", feedback="Please assign all tasks to Nancy")
+        self.assertIn("Refined based on feedback", extracted["summary"])
+        for item in extracted["action_items"]:
+            self.assertEqual(item["assignee"], "Nancy")
+
     async def test_jira_client_mock(self):
         """Verifies that the Jira Client correctly simulates connection checks, user lookups, and ticket generation."""
         client = JiraClient(mock_mode=True)

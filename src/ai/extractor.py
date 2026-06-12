@@ -57,13 +57,13 @@ class AIExtractor:
                 logger.error(f"Failed to initialize LangChain Gemini: {e}. Falling back to mock mode.")
                 self.mock_mode = True
 
-    async def extract(self, standardized_transcript: str, long_term_memory: List[str] = None) -> Dict[str, Any]:
+    async def extract(self, standardized_transcript: str, long_term_memory: List[str] = None, feedback: str = None) -> Dict[str, Any]:
         """
         Sends transcript and historical memory to Gemini using LangChain structured tool calling.
         """
         if self.mock_mode:
             logger.info("AIExtractor running in MOCK mode. Returning simulated extraction.")
-            return self._get_mock_extraction()
+            return self._get_mock_extraction(feedback=feedback)
 
         # Format long-term memory context
         memory_context = ""
@@ -78,8 +78,19 @@ class AIExtractor:
             "Analyze the transcript and extract structural information matching the schema."
         )
 
+        feedback_instruction = ""
+        if feedback:
+            feedback_instruction = f"""
+=== IMPORTANT: HUMAN FEEDBACK / CORRECTION ON PREVIOUS EXTRACTION ===
+The human operator provided the following corrections/feedback on the previous extraction:
+"{feedback}"
+Please adapt your extraction (summary, decisions, and action items) to incorporate this feedback completely.
+====================================================================
+"""
+
         user_prompt = f"""
         {memory_context}
+        {feedback_instruction}
         
         Analyze this meeting transcript and extract structured details:
         
@@ -102,9 +113,9 @@ class AIExtractor:
             logger.critical(f"Error during LangChain Gemini invocation: {e}.")
             raise e
 
-    def _get_mock_extraction(self) -> Dict[str, Any]:
+    def _get_mock_extraction(self, feedback: str = None) -> Dict[str, Any]:
         """Provides high-quality mock data matching the patient brochure transcript."""
-        return {
+        data = {
             "title": "Patient Skin Cancer Education Brochure Alignment Meeting",
             "date": "2026-06-12",
             "summary": "The clinical and product teams aligned on the structure and core content for the upcoming patient skin cancer brochure. Dr. Kwan explained the medical distinctions between UVA and UVB rays, basal cell carcinoma, squamous cell carcinoma, actinic keratoses, and melanoma. The team agreed on standardizing patient descriptions, highlighting warning signs of treatment reactions, and specifying broad-spectrum mineral sunscreen recommendations.",
@@ -175,3 +186,21 @@ class AIExtractor:
                 }
             ]
         }
+        
+        if feedback:
+            feedback_clean = feedback.strip()
+            data["summary"] += f" (Refined based on feedback: {feedback_clean})"
+            data["decisions"].append(f"Refinement Decision: Addressed human feedback: '{feedback_clean}'")
+            
+            # Check for assign to Nancy instruction
+            if "assign" in feedback_clean.lower() and "nancy" in feedback_clean.lower():
+                for item in data["action_items"]:
+                    item["assignee"] = "Nancy"
+            elif "assign" in feedback_clean.lower() and "sarah" in feedback_clean.lower():
+                for item in data["action_items"]:
+                    item["assignee"] = "Sarah"
+            elif "assign" in feedback_clean.lower() and "priya" in feedback_clean.lower():
+                for item in data["action_items"]:
+                    item["assignee"] = "Priya"
+                    
+        return data

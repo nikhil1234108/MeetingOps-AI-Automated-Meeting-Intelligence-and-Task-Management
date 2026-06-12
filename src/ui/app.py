@@ -102,6 +102,10 @@ class ExtractRequest(BaseModel):
     uuid: str
     transcript: str
 
+class RegenerateRequest(BaseModel):
+    uuid: str
+    feedback: str
+
 class DecisionUpdateModel(BaseModel):
     decisions: List[str]
 
@@ -249,7 +253,9 @@ async def ingest_file(file: UploadFile = File(...)):
                 "summary": cached_run["summary"],
                 "decisions": cached_run["decisions"],
                 "action_items": cached_run["action_items"],
-                "current_gate": "extraction"
+                "current_gate": "extraction",
+                "feedback": None,
+                "retry_count": 0
             }, config=config)
             
             audit_logger.log_event("CACHE_HIT_RETRIEVED", {"uuid": cached_uuid, "fingerprint": fingerprint})
@@ -282,7 +288,9 @@ async def ingest_file(file: UploadFile = File(...)):
             "tickets": [],
             "action_items": [],
             "decisions": [],
-            "current_gate": "ingestion"
+            "current_gate": "ingestion",
+            "feedback": None,
+            "retry_count": 0
         }, config=config)
         
         audit_logger.log_event("FILE_UPLOADED_CACHE_MISS", {"uuid": run_uuid, "fingerprint": fingerprint})
@@ -341,6 +349,57 @@ async def extract_content(req: ExtractRequest):
         }
     except Exception as e:
         logger.error(f"Error during AI extraction node: {e}")
+        return JSONResponse(status_code=500, content={"error": str(e)})
+
+@app.post("/api/regenerate")
+async def regenerate_with_feedback(req: RegenerateRequest):
+    """Updates the LangGraph checkpointer state with feedback, increments retry_count, and resumes execution to trigger regeneration."""
+    config = {"configurable": {"thread_id": req.uuid}}
+    
+    # Retrieve current state from checkpointer
+    graph_state = await compiled_graph.aget_state(config)
+    if not graph_state.values:
+        raise HTTPException(status_code=404, detail="LangGraph execution thread not found.")
+        
+    current_retry = graph_state.values.get("retry_count", 0)
+    
+    try:
+        # Update feedback and increment retry_count in checkpointer memory saver
+        await compiled_graph.aupdate_state(config, {
+            "feedback": req.feedback,
+            "retry_count": current_retry + 1
+        })
+        
+        # Resume graph execution -> runs the conditional edge which routes back to 'extract' because feedback is set
+        await compiled_graph.ainvoke(None, config=config)
+        
+        # Retrieve newly updated state
+        updated_state = await compiled_graph.aget_state(config)
+        state_vals = updated_state.values
+        
+        # Format output payload
+        extracted_data = {
+            "title": state_vals.get("title"),
+            "date": state_vals.get("date"),
+            "summary": state_vals.get("summary"),
+            "decisions": state_vals.get("decisions", []),
+            "action_items": state_vals.get("action_items", [])
+        }
+        
+        # Generate HMAC anti-tampering signature
+        serialized = serialize_state_payload(
+            extracted_data["title"], extracted_data["summary"], 
+            extracted_data["decisions"], extracted_data["action_items"]
+        )
+        signature = generate_signature(serialized)
+        
+        audit_logger.log_event("AI_EXTRACTION_REGENERATED", {"uuid": req.uuid, "retry_count": current_retry + 1})
+        return {
+            "extracted": extracted_data,
+            "signature": signature
+        }
+    except Exception as e:
+        logger.error(f"Error during AI regeneration: {e}")
         return JSONResponse(status_code=500, content={"error": str(e)})
 
 @app.post("/api/save-state")

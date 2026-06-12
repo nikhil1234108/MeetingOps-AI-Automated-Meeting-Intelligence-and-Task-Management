@@ -30,6 +30,8 @@ class AgentState(TypedDict):
     current_gate: str
     user_approved: bool
     error: str
+    feedback: Optional[str]
+    retry_count: int
 
 # ----------------- GRAPH NODES -----------------
 
@@ -58,7 +60,12 @@ async def extract_node(state: AgentState) -> Dict[str, Any]:
     # 2. Run extraction
     extractor = AIExtractor()
     try:
-        extracted = await extractor.extract(state["raw_transcript"], long_term_memory=long_term_mem)
+        feedback = state.get("feedback")
+        extracted = await extractor.extract(
+            state["raw_transcript"], 
+            long_term_memory=long_term_mem,
+            feedback=feedback
+        )
         
         # Save initially to runs table in database (for data caching)
         await Database.save_run(
@@ -80,7 +87,8 @@ async def extract_node(state: AgentState) -> Dict[str, Any]:
             "action_items": extracted["action_items"],
             "current_gate": "extraction",
             "user_approved": False,
-            "error": ""
+            "error": "",
+            "feedback": None
         }
     except Exception as e:
         logger.error(f"AI Extraction node failed: {e}")
@@ -148,7 +156,7 @@ async def jira_map_node(state: AgentState) -> Dict[str, Any]:
     }
 
 async def sync_jira_node(state: AgentState) -> Dict[str, Any]:
-    """Gate 4: Syncs approved action items to Jira Cloud."""
+    """Gate 4: Syncs approved action items to Jira Cloud with error catching."""
     logger.info(f"Node Sync Jira: Creating tickets for run {state.get('uuid')}")
     
     config_path_app = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "configs", "app_config.json"))
@@ -164,44 +172,57 @@ async def sync_jira_node(state: AgentState) -> Dict[str, Any]:
     jira_client = JiraClient(mock_mode=mock_mode)
     tickets = []
     
-    for idx, item in enumerate(state["action_items"]):
-        desc = (
-            f"Action Item extracted from meeting notes.\n\n"
-            f"Task: {item['task']}\n"
-            f"Originally Assigned to: {item['assignee']}\n"
-            f"Priority: {item['priority']}\n"
-            f"Confidence: {item.get('confidence', 1.0)}\n"
-        )
-        
-        # Invoke the sync tool
-        logger.info(f"Syncing ticket {idx+1}/{len(state['action_items'])}")
-        res_str = await jira_issue_sync_tool.ainvoke({
-            "summary": item["task"],
-            "description": desc,
-            "issue_type": item["issue_type"],
-            "priority": item["priority"],
-            "assignee_id": item.get("resolvedAccountId")
-        })
-        res = json.loads(res_str)
-        res["assignee"] = item.get("assignee")
-        tickets.append(res)
-        
-        # Save ticket in database
-        if res.get("success"):
-            await Database.save_jira_ticket(
-                run_uuid=state["uuid"],
-                ticket_key=res["key"],
-                ticket_url=res["url"],
-                summary=res["summary"],
-                issue_type=res["issue_type"]
+    try:
+        for idx, item in enumerate(state["action_items"]):
+            desc = (
+                f"Action Item extracted from meeting notes.\n\n"
+                f"Task: {item['task']}\n"
+                f"Originally Assigned to: {item['assignee']}\n"
+                f"Priority: {item['priority']}\n"
+                f"Confidence: {item.get('confidence', 1.0)}\n"
             )
-
-    return {
-        "tickets": tickets,
-        "current_gate": "slack",
-        "user_approved": False,
-        "error": ""
-    }
+            
+            # Invoke the sync tool
+            logger.info(f"Syncing ticket {idx+1}/{len(state['action_items'])}")
+            res_str = await jira_issue_sync_tool.ainvoke({
+                "summary": item["task"],
+                "description": desc,
+                "issue_type": item["issue_type"],
+                "priority": item["priority"],
+                "assignee_id": item.get("resolvedAccountId")
+            })
+            res = json.loads(res_str)
+            res["assignee"] = item.get("assignee")
+            tickets.append(res)
+            
+            # Save ticket in database
+            if res.get("success"):
+                await Database.save_jira_ticket(
+                    run_uuid=state["uuid"],
+                    ticket_key=res["key"],
+                    ticket_url=res["url"],
+                    summary=res["summary"],
+                    issue_type=res["issue_type"]
+                )
+        
+        # Check if any ticket failed
+        has_failed = any(not t.get("success", False) for t in tickets)
+        error_msg = "One or more Jira tickets failed to sync." if has_failed else ""
+        
+        return {
+            "tickets": tickets,
+            "current_gate": "slack" if not has_failed else "jira",
+            "user_approved": False,
+            "error": error_msg
+        }
+    except Exception as e:
+        logger.error(f"Error running sync_jira_node: {e}")
+        return {
+            "tickets": tickets,
+            "current_gate": "jira",
+            "user_approved": False,
+            "error": str(e)
+        }
 
 async def slack_notify_node(state: AgentState) -> Dict[str, Any]:
     """Final: Posts Block Kit message to Slack."""
@@ -232,6 +253,57 @@ async def slack_notify_node(state: AgentState) -> Dict[str, Any]:
         "error": ""
     }
 
+async def rerank_action_items(state: AgentState) -> Dict[str, Any]:
+    """Reranks action items based on priority (Highest -> Lowest) and confidence (descending)."""
+    logger.info(f"Node Rerank: Sorting action items for run {state.get('uuid')}")
+    action_items = state.get("action_items", [])
+    if not action_items:
+        return {}
+        
+    priority_order = {
+        "Highest": 0,
+        "High": 1,
+        "Medium": 2,
+        "Low": 3,
+        "Lowest": 4
+    }
+    
+    # Sort action items deterministically
+    sorted_items = sorted(
+        action_items,
+        key=lambda x: (
+            priority_order.get(x.get("priority", "Medium"), 2),
+            -x.get("confidence", 0.0)
+        )
+    )
+    
+    return {"action_items": sorted_items}
+
+# ----------------- CONDITIONAL ROUTING EDGES -----------------
+
+def route_after_jira_map(state: AgentState) -> str:
+    """Routes back to extract if feedback is present, otherwise proceeds to sync_jira."""
+    feedback = state.get("feedback")
+    retry_count = state.get("retry_count", 0)
+    
+    if feedback and feedback.strip():
+        if retry_count >= 3:
+            logger.warning("Max regeneration retries (3) reached. Proceeding to sync.")
+            return "sync_jira"
+        logger.info(f"Feedback present. Routing back to extract (attempt {retry_count + 1}).")
+        return "extract"
+        
+    return "sync_jira"
+
+def route_after_sync(state: AgentState) -> str:
+    """Routes back to jira_map if any ticket sync failed or error is present."""
+    tickets = state.get("tickets", [])
+    has_failed = any(not t.get("success", False) for t in tickets) if tickets else False
+    if has_failed or state.get("error"):
+        logger.warning("Jira sync had failures or error. Routing back to jira_map.")
+        return "jira_map"
+    return "slack_notify"
+
 # ----------------- GRAPH CONSTRUCT -----------------
 
 def get_workflow():
@@ -241,16 +313,37 @@ def get_workflow():
     # Define nodes
     workflow.add_node("ingest", ingest_node)
     workflow.add_node("extract", extract_node)
+    workflow.add_node("rerank", rerank_action_items)
     workflow.add_node("jira_map", jira_map_node)
     workflow.add_node("sync_jira", sync_jira_node)
     workflow.add_node("slack_notify", slack_notify_node)
     
-    # Define edges (sequential flow)
+    # Define edges (sequential flow with cyclic feedback loops)
     workflow.set_entry_point("ingest")
     workflow.add_edge("ingest", "extract")
-    workflow.add_edge("extract", "jira_map")
-    workflow.add_edge("jira_map", "sync_jira")
-    workflow.add_edge("sync_jira", "slack_notify")
+    workflow.add_edge("extract", "rerank")
+    workflow.add_edge("rerank", "jira_map")
+    
+    # Conditional edge from jira_map: loops back to extract if feedback is present, else syncs
+    workflow.add_conditional_edges(
+        "jira_map",
+        route_after_jira_map,
+        {
+            "extract": "extract",
+            "sync_jira": "sync_jira"
+        }
+    )
+    
+    # Conditional edge from sync_jira: loops back to jira_map on error, else proceeds to slack
+    workflow.add_conditional_edges(
+        "sync_jira",
+        route_after_sync,
+        {
+            "jira_map": "jira_map",
+            "slack_notify": "slack_notify"
+        }
+    )
+    
     workflow.add_edge("slack_notify", END)
     
     return workflow

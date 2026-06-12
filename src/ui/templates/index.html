@@ -757,6 +757,17 @@
                 </div>
             </div>
 
+            <!-- Feedback / Regeneration Section -->
+            <div class="form-group" style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.05);">
+                <label class="form-label" style="color: var(--primary-accent); font-weight: 600;">Regenerate AI Extraction with Feedback</label>
+                <div style="display: flex; gap: 1rem; align-items: flex-start;">
+                    <textarea id="regenerationFeedback" placeholder="e.g., 'Assign the mineral sunscreen task to Nancy' or 'Add a decision that the scar explanation is mandatory.'" style="min-height: 80px; flex: 1;"></textarea>
+                    <button class="btn btn-primary" style="height: 80px; align-self: flex-start; background: linear-gradient(135deg, var(--primary-accent), #8b5cf6);" onclick="regenerateExtraction()">
+                        🔄 Regenerate
+                    </button>
+                </div>
+            </div>
+
             <div class="btn-group">
                 <button class="btn btn-secondary" onclick="backToGate(1)">← Back to Ingestion</button>
                 <button class="btn btn-primary" onclick="proceedToGate3()">Approve & Go to Jira Setup →</button>
@@ -774,6 +785,14 @@
 
             <div id="jiraProjectInfo" style="margin-bottom: 1.5rem; padding: 1rem; border-radius: 8px; background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.15);">
                 <strong>Target Jira Project Key:</strong> <span id="jiraProjectKeyBadge" style="color: var(--primary-accent); font-family: monospace; font-size: 1.1rem; font-weight: 700;">OA</span>
+            </div>
+
+            <!-- Glowing Sync Failure Alert Box -->
+            <div class="cache-alert-box" id="syncErrorBox" style="display: none; background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.25); color: #fee2e2; box-shadow: 0 0 15px rgba(239, 68, 68, 0.1);">
+                <span>⚠️</span>
+                <div id="syncErrorMessage">
+                    <strong>Jira Synchronization Error:</strong> Some tickets failed to sync. Please verify connection credentials and speaker mappings.
+                </div>
             </div>
 
             <div id="jiraCardsContainer">
@@ -1293,12 +1312,83 @@
                 pipelineState.tickets = data.tickets || [];
                 pipelineState.signature = data.signature; // Save tickets-verified HMAC signature
                 
+                // Loop-back error handling check
+                const failures = pipelineState.tickets.filter(t => !t.success);
+                if (failures.length > 0) {
+                    document.getElementById('syncErrorBox').style.display = 'block';
+                    document.getElementById('syncErrorMessage').innerHTML = `
+                        <strong>Jira Sync encountered issues. Some tickets failed:</strong><br>
+                        ${failures.map(f => `• ${f.summary || 'Ticket'}: ${f.error || 'Failed'}`).join('<br>')}
+                    `;
+                    showLoading(false);
+                    alert("Jira Sync failed for some tickets. Returning to mapping stage to adjust.");
+                    showGate(3);
+                    return;
+                } else {
+                    document.getElementById('syncErrorBox').style.display = 'none';
+                }
+
                 renderSlackPreview();
                 showLoading(false);
                 showGate(4);
             } catch (error) {
                 showLoading(false);
-                alert("Jira Sync failed: " + error.message);
+                document.getElementById('syncErrorBox').style.display = 'block';
+                document.getElementById('syncErrorMessage').innerHTML = `
+                    <strong>Jira Sync failed:</strong> ${error.message}
+                `;
+                alert("Jira Sync failed. Returning to mapping stage to adjust.");
+                showGate(3);
+            }
+        }
+
+        // Gate 2 Feedback regeneration handler
+        async function regenerateExtraction() {
+            const feedbackText = document.getElementById('regenerationFeedback').value.trim();
+            if (!feedbackText) {
+                alert("Please enter feedback before regenerating.");
+                return;
+            }
+
+            showLoading(true, "Regenerating AI extraction with feedback...");
+            try {
+                const response = await fetch(`${BASE_API}/api/regenerate`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        uuid: pipelineState.uuid,
+                        feedback: feedbackText
+                    })
+                });
+                const data = await response.json();
+                
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+
+                // Update UI fields with newly regenerated data
+                document.getElementById('meetingTitle').value = data.extracted.title;
+                document.getElementById('meetingDate').value = data.extracted.date;
+                document.getElementById('meetingSummary').value = data.extracted.summary;
+                
+                pipelineState.title = data.extracted.title;
+                pipelineState.date = data.extracted.date;
+                pipelineState.summary = data.extracted.summary;
+                pipelineState.decisions = data.extracted.decisions || [];
+                pipelineState.action_items = data.extracted.action_items || [];
+                pipelineState.signature = data.signature; // Save newly generated anti-tampering signature
+
+                renderDecisions();
+                renderActionItemsTable();
+                
+                // Clear the feedback text area
+                document.getElementById('regenerationFeedback').value = "";
+                
+                showLoading(false);
+                alert("AI Extraction successfully regenerated and reranked based on your feedback!");
+            } catch (error) {
+                showLoading(false);
+                alert("Regeneration failed: " + error.message);
             }
         }
 
