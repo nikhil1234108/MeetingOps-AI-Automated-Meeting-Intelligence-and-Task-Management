@@ -80,6 +80,9 @@ async def startup_event():
     postgres_saver_context = AsyncPostgresSaver.from_conn_string(postgres_conn_str)
     memory_saver = await postgres_saver_context.__aenter__()
     
+    # Run setup to initialize checkpoints tables in PostgreSQL
+    await memory_saver.setup()
+    
     # Compile the graph with interrupts before each state-mutating human gate node
     workflow = get_workflow()
     compiled_graph = workflow.compile(
